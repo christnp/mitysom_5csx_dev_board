@@ -1,0 +1,55 @@
+#!/bin/sh
+
+bus=0
+addr=0x42
+
+writereg() {
+	i2cset -r -y $bus $addr 0x$1 0x$2
+}
+
+clearleds() {
+	writereg 1 0
+	writereg 2 0
+	writereg 3 0
+	writereg 4 0
+	writereg 5 0
+}
+
+dorgd() {
+	clearleds
+	writereg 1 f3 enable 1 3 and 4 for pattern, 2 is off
+	writereg 2 4f
+	writereg 3 0
+	writereg 4 b6
+	writereg 5 c8
+	writereg 16 88
+	writereg 18 25
+	writereg 19 00
+	writereg 1b 2
+	sleep 4
+	writereg 1b 0
+}
+
+clearleds
+
+writereg 1 1
+writereg 2 40
+sleep 1
+writereg 2 0
+
+writereg 1 4
+writereg 3 40
+sleep 1
+writereg 3 0
+
+writereg 1 10
+writereg 4 40
+sleep 1
+writereg 4 0
+
+writereg 1 40
+writereg 5 40
+sleep 1
+writereg 5 0
+
+clearleds
