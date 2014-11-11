@@ -1,6 +1,6 @@
 <library>
   <message>Loading now from mitysom_5csx_dev_board.ipx</message>
 
-  <path path="../vhdl/**/*" />
+  <path path="./vhdl/**/*" />
 </library>
 
