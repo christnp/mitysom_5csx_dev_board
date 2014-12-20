@@ -57,6 +57,22 @@
          type = "int";
       }
    }
+   element hsmc2_in
+   {
+      datum _sortIndex
+      {
+         value = "13";
+         type = "int";
+      }
+   }
+   element hsmc2_out
+   {
+      datum _sortIndex
+      {
+         value = "12";
+         type = "int";
+      }
+   }
    element hsmc_in_0
    {
       datum _sortIndex
@@ -175,6 +191,16 @@
    name="reset"
    internal="clk_100Mhz.clk_in_reset"
    type="reset"
+   dir="end" />
+ <interface
+   name="hsmc2_out"
+   internal="hsmc2_out.external_connection"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="hsmc2_in"
+   internal="hsmc2_in.external_connection"
+   type="conduit"
    dir="end" />
  <module kind="altera_hps" version="14.0" enabled="1" name="hps_0">
   <parameter name="MEM_VENDOR" value="JEDEC" />
@@ -1342,6 +1368,34 @@
   <parameter name="gui_pll_cascading_mode">Create an adjpllin signal to connect with an upstream PLL</parameter>
   <parameter name="AUTO_REFCLK_CLOCK_RATE" value="100000000" />
  </module>
+ <module kind="altera_avalon_pio" version="14.0" enabled="1" name="hsmc2_out">
+  <parameter name="bitClearingEdgeCapReg" value="false" />
+  <parameter name="bitModifyingOutReg" value="false" />
+  <parameter name="captureEdge" value="false" />
+  <parameter name="direction" value="Output" />
+  <parameter name="edgeType" value="RISING" />
+  <parameter name="generateIRQ" value="false" />
+  <parameter name="irqType" value="LEVEL" />
+  <parameter name="resetValue" value="0" />
+  <parameter name="simDoTestBenchWiring" value="false" />
+  <parameter name="simDrivenValue" value="0" />
+  <parameter name="width" value="6" />
+  <parameter name="clockRate" value="75000000" />
+ </module>
+ <module kind="altera_avalon_pio" version="14.0" enabled="1" name="hsmc2_in">
+  <parameter name="bitClearingEdgeCapReg" value="false" />
+  <parameter name="bitModifyingOutReg" value="false" />
+  <parameter name="captureEdge" value="false" />
+  <parameter name="direction" value="Input" />
+  <parameter name="edgeType" value="RISING" />
+  <parameter name="generateIRQ" value="false" />
+  <parameter name="irqType" value="LEVEL" />
+  <parameter name="resetValue" value="0" />
+  <parameter name="simDoTestBenchWiring" value="false" />
+  <parameter name="simDrivenValue" value="0" />
+  <parameter name="width" value="8" />
+  <parameter name="clockRate" value="75000000" />
+ </module>
  <connection
    kind="avalon"
    version="14.0"
@@ -1555,6 +1609,36 @@
   <parameter name="baseAddress" value="0x8000" />
   <parameter name="defaultConnection" value="false" />
  </connection>
+ <connection kind="clock" version="14.0" start="pll_0.outclk0" end="hsmc2_in.clk" />
+ <connection
+   kind="reset"
+   version="14.0"
+   start="hps_0.h2f_reset"
+   end="hsmc2_out.reset" />
+ <connection
+   kind="reset"
+   version="14.0"
+   start="hps_0.h2f_reset"
+   end="hsmc2_in.reset" />
+ <connection
+   kind="avalon"
+   version="14.0"
+   start="hps_0.h2f_lw_axi_master"
+   end="hsmc2_out.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x6000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="14.0"
+   start="hps_0.h2f_lw_axi_master"
+   end="hsmc2_in.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x7000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection kind="clock" version="14.0" start="pll_0.outclk0" end="hsmc2_out.clk" />
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
  <interconnectRequirement for="$system" name="qsys_mm.maxAdditionalLatency" value="4" />
 </system>

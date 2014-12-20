@@ -28,6 +28,7 @@
 -- 2014-05-01	0.4		Dan V		Added FPGA DDR, HPS BERT Test,Renamed to mitysom
 -- 2014-05-02	1.0		Dan V		Updated to use 5CSXFC6CU23C7, added DDR 
 --											termination settings to tcl scripts
+-- 2014-12-19	1.1		Dan V		Moved HSMC2 to PIO core
 -------------------------------------------------------------------------------
 
 library ieee;
@@ -360,7 +361,9 @@ architecture rtl of mitysom_5csx_dev_board_top is
 			fpga_ddr_mem_dqs_n                : inout std_logic_vector(0 downto 0)  := (others => 'X'); -- mem_dqs_n
 			fpga_ddr_mem_odt                  : out   std_logic_vector(0 downto 0);                      -- mem_odt
 			clk2ddr_clk                       : in    std_logic                     := 'X';            -- clk
-			reset_reset_n                     : in    std_logic                     := 'X'
+			reset_reset_n                     : in    std_logic                     := 'X';
+			hsmc2_in_export                   : in    std_logic_vector(7 downto 0)  := (others => 'X'); -- export
+			hsmc2_out_export                  : out   std_logic_vector(5 downto 0)  
 		);
 	end component mitysom_5csx_dev_board;
 
@@ -391,34 +394,34 @@ begin  -- architecture rtl
 -- Component instantiations
 ----------------------------------------------------------------------------
 		 
-	altsource_probe_component : altsource_probe
-		GENERIC MAP (
-			enable_metastability => "NO",
-			instance_id => "NONE",
-			probe_width => 8,
-			sld_auto_instance_index => "YES",
-			sld_instance_index => 0,
-			source_initial_value => " 0",
-			source_width => 6,
-			lpm_type => "altsource_probe"
-		)
-		PORT MAP (
-			source(0) => HSMC2_SMSDA,
-			source(1) => HSMC2_D1_P,
-			source(2) => HSMC2_D1_N,
-			source(3) => HSMC2_TX0_P,
-			source(4) => HSMC2_TX0_N,
-			source(5) => HSMC2_TX1,
-
-			probe(0) => HSMC2_SMSCL,
-			probe(1) => HSMC2_D2_P,
-			probe(2) => HSMC2_D2_N,
-			probe(3) => HSMC2_RX0_P,
-			probe(4) => HSMC2_RX0_N,
-			probe(5) => HSMC2_RX1_P,
-			probe(6) => HSMC2_RX1_N,
-			probe(7) => HSMC2_PRSNTN
-		);
+--	altsource_probe_component : altsource_probe
+--		GENERIC MAP (
+--			enable_metastability => "NO",
+--			instance_id => "NONE",
+--			probe_width => 8,
+--			sld_auto_instance_index => "YES",
+--			sld_instance_index => 0,
+--			source_initial_value => " 0",
+--			source_width => 6,
+--			lpm_type => "altsource_probe"
+--		)
+--		PORT MAP (
+--			source(0) => HSMC2_SMSDA,
+--			source(1) => HSMC2_D1_P,
+--			source(2) => HSMC2_D1_N,
+--			source(3) => HSMC2_TX0_P,
+--			source(4) => HSMC2_TX0_N,
+--			source(5) => HSMC2_TX1,
+--
+--			probe(0) => HSMC2_SMSCL,
+--			probe(1) => HSMC2_D2_P,
+--			probe(2) => HSMC2_D2_N,
+--			probe(3) => HSMC2_RX0_P,
+--			probe(4) => HSMC2_RX0_N,
+--			probe(5) => HSMC2_RX1_P,
+--			probe(6) => HSMC2_RX1_N,
+--			probe(7) => HSMC2_PRSNTN
+--		);
 		
 		altsource_probe_component1 : altsource_probe
 		GENERIC MAP (
@@ -619,7 +622,21 @@ u0 : component mitysom_5csx_dev_board
 			fpga_ddr_status_local_init_done   => s_fpga_ddr_status_local_init_done,   --       fpga_ddr_status.local_init_done
 			fpga_ddr_status_local_cal_success => s_fpga_ddr_status_local_cal_success, --                      .local_cal_success
 			fpga_ddr_status_local_cal_fail    => s_fpga_ddr_status_local_cal_fail,    --                      .local_cal_fail
-			reset_reset_n => '1'
+			reset_reset_n => '1',
+			hsmc2_in_export(0) => HSMC2_SMSCL,
+			hsmc2_in_export(1) => HSMC2_D2_P,
+			hsmc2_in_export(2) => HSMC2_D2_N,
+			hsmc2_in_export(3) => HSMC2_RX0_P,
+			hsmc2_in_export(4) => HSMC2_RX0_N,
+			hsmc2_in_export(5) => HSMC2_RX1_P,
+			hsmc2_in_export(6) => HSMC2_RX1_N,
+			hsmc2_in_export(7) => HSMC2_PRSNTN,
+			hsmc2_out_export(0) => HSMC2_SMSDA,
+			hsmc2_out_export(1) => HSMC2_D1_P,
+			hsmc2_out_export(2) => HSMC2_D1_N,
+			hsmc2_out_export(3) => HSMC2_TX0_P,
+			hsmc2_out_export(4) => HSMC2_TX0_N,
+			hsmc2_out_export(5) => HSMC2_TX1
 		);
    
 end architecture rtl;
