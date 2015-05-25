@@ -1,3 +1,0 @@
-[submodule "base_project/vhdl/mitysom_5csx_ip"]
-	path = base_project/vhdl/mitysom_5csx_ip
-	url = git://support.criticallink.com/home/git/mitysom-5cs/qsys_ip.git
