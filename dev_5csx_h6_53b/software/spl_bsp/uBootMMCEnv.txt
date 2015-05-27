@@ -1,3 +1,4 @@
+autoload=no
 bootdelay=5
 baudrate=115200
 bootargs=console=ttyS0,115200 root=/dev/mmcblk0p2 rw rootwait
@@ -22,7 +23,7 @@ mmcloadfpga=${mmcloadcmd} mmc 0:${mmcloadpart} ${loadfpgaaddr} ${mmcfpgaloc}
 mmcloadcmd=ext2load
 mmcloadpart=2
 mmcroot=/dev/mmcblk0p2
-mmcfdtloc=/boot/socfpga_mitysom5csx_h6_53b_devkit.dtb
+mmcfdtloc=/boot/socfpga_mitysom5csx-h6-53b_devkit.dtb
 mmckernelloc=/boot/uImage
 mmcfpgaloc=/home/root/dev_5csx_h6_53b.rbf
 qspiboot=run qspisetbootargs;run fpgaload;bootm ${loadkerneladdr} ${loadinitramfsaddr} ${loadfdtaddr}
