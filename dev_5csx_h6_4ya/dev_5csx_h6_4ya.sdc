@@ -4,10 +4,6 @@ set_input_delay -clock altera_reserved_tck -clock_fall 3 [get_ports altera_reser
 set_input_delay -clock altera_reserved_tck -clock_fall 3 [get_ports altera_reserved_tms]
 set_output_delay -clock altera_reserved_tck -clock_fall 3 [get_ports altera_reserved_tdo]
 
-derive_pll_clocks -create_base_clocks
-derive_clock_uncertainty
-create_clock -period 10.000 [get_ports CLK2DDR]
-
 # For async resets
 set_false_path -from {mitysom_5csx_dev_board:u0|altera_reset_controller:rst_controller_002|altera_reset_synchronizer:alt_rst_sync_uq1|altera_reset_synchronizer_int_chain_out} -to *
 set_false_path -from {mitysom_5csx_dev_board:u0|altera_reset_controller:reset_controller_0|altera_reset_synchronizer:alt_rst_sync_uq1|altera_reset_synchronizer_int_chain_out} -to *
