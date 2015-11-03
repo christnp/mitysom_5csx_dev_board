@@ -1,6 +1,6 @@
 # HSMC
-set_location_assignment PIN_AF27 -to HSMC1_SMSDA
-set_location_assignment PIN_AF28 -to HSMC1_SMSCL
+set_location_assignment PIN_AF28 -to HSMC1_SMSDA
+set_location_assignment PIN_AF27 -to HSMC1_SMSCL
 set_location_assignment PIN_AG5 -to HSMC1_CLKOUT0
 set_location_assignment PIN_Y15 -to HSMC1_CLKIN0
 set_location_assignment PIN_AH21 -to HSMC1_D0

@@ -790,8 +790,8 @@ set_location_assignment PIN_AG13 -to HSMC1_RX8
 set_location_assignment PIN_AF13 -to HSMC1_RX8_N
 set_location_assignment PIN_AE12 -to HSMC1_RX9
 set_location_assignment PIN_AD12 -to HSMC1_RX9_N
-set_location_assignment PIN_AF28 -to HSMC1_SMSCL
-set_location_assignment PIN_AF27 -to HSMC1_SMSDA
+set_location_assignment PIN_AF27 -to HSMC1_SMSCL
+set_location_assignment PIN_AF28 -to HSMC1_SMSDA
 set_location_assignment PIN_AH23 -to HSMC1_TX0
 set_location_assignment PIN_AH22 -to HSMC1_TX0_N
 set_location_assignment PIN_AF20 -to HSMC1_TX1

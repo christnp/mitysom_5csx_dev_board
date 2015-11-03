@@ -736,8 +736,8 @@ set_location_assignment PIN_AB26 -to FPGA_DDR_RESET_N
 set_location_assignment PIN_Y17 -to FPGA_DDR_WE_N[0]
 set_location_assignment PIN_AB25 -to RZQ_2
 set_location_assignment PIN_W8 -to FPGA_DDR_CS_N[0]
-set_location_assignment PIN_AF27 -to HSMC1_SMSDA
-set_location_assignment PIN_AF28 -to HSMC1_SMSCL
+set_location_assignment PIN_AF28 -to HSMC1_SMSDA
+set_location_assignment PIN_AF27 -to HSMC1_SMSCL
 set_location_assignment PIN_AG5 -to HSMC1_CLKOUT0
 set_location_assignment PIN_Y15 -to HSMC1_CLKIN0
 set_location_assignment PIN_AH21 -to HSMC1_D0
