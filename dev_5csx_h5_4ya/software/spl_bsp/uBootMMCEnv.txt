@@ -23,9 +23,9 @@ mmcloadfpga=${mmcloadcmd} mmc 0:${mmcloadpart} ${loadfpgaaddr} ${mmcfpgaloc}
 mmcloadcmd=ext2load
 mmcloadpart=2
 mmcroot=/dev/mmcblk0p2
-mmcfdtloc=/boot/socfpga_mitysom5csx-h6-4ya_devkit.dtb
+mmcfdtloc=/boot/socfpga_mitysom5csx-h5-4ya_devkit.dtb
 mmckernelloc=/boot/uImage
-mmcfpgaloc=/home/root/dev_5csx_h6_4ya.rbf
+mmcfpgaloc=/home/root/dev_5csx_h5_4ya.rbf
 qspiboot=run qspisetbootargs;run fpgaload;bootm ${loadkerneladdr} ${loadinitramfsaddr} ${loadfdtaddr}
 qspisetbootargs=setenv bootargs console=ttyS0,115200 root=/dev/ram0
 qspikernelloc=0xe0000
