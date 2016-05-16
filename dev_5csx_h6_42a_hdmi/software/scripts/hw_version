@@ -1,0 +1,23 @@
+#!/bin/sh
+# Reads the HW version from the GPIs
+
+EXPECTED_VER="1100000000"
+version=""
+
+for i in {184..193}
+do
+	echo $i > /sys/class/gpio/export
+	tStr=$(cat /sys/class/gpio/gpio$i/value)
+	version=$tStr$version
+	echo $i > /sys/class/gpio/unexport
+done
+
+echo "HW VERION: $version"
+echo "EXPECTED : $EXPECTED_VER"
+
+if [ "$version" = "$EXPECTED_VER" ]; then
+	echo "CORRECT VERSION"
+else
+	echo "FAILED: VERSION INCORRECT"
+fi;
+

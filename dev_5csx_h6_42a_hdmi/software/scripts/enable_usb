@@ -1,0 +1,4 @@
+#!/bin/sh
+modprobe configfs
+modprobe libcomposite
+modprobe g_mass_storage file=/home/root/scripts/backing_file stall=0

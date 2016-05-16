@@ -1,0 +1,29 @@
+#!/bin/sh
+
+bus=1
+addr=0x6f
+writereg() {
+        i2cset -f -y $bus $addr 0x$1 0x$2
+}
+
+readreg() {
+        i2cget -f -y $bus $addr 0x$1
+}
+
+# Read the 3 bytes of power data from the part
+lsb=$(readreg 7|cut -c3-4)
+msb1=$(readreg 6|cut -c3-4)
+msb2=$(readreg 5|cut -c3-4)
+
+# string the bytes together
+val=0x${msb2}${msb1}${lsb}
+# and convert to decimal
+dval=$(printf %d $val)
+
+# LSB of input voltage is 25mV
+# LSB of monitor voltage is 25uV
+# Sense resistor is 0.01 ohms
+# Therefore power is register x 25x10^-6 x 25x10^-3 x 100)
+w=$(expr $dval \* 625)
+w=$(expr $w / 10000)
+echo power = $w mW

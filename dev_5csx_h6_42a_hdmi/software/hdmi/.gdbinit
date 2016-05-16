@@ -1,0 +1,1 @@
+set sysroot /opt/poky/1.5.4/sysroots/cortexa9hf-vfp-neon-poky-linux-gnueabi

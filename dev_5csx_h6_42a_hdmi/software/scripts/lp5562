@@ -1,0 +1,18 @@
+#!/bin/sh
+echo 100 > /sys/class/leds/B/brightness
+echo "BLUE ON"
+sleep 1
+echo 0 > /sys/class/leds/B/brightness
+echo 100 > /sys/class/leds/R/brightness
+echo "RED ON"
+sleep 1
+echo 0 > /sys/class/leds/R/brightness
+echo 100 > /sys/class/leds/G/brightness
+echo "GREEN ON"
+sleep 1
+echo 0 > /sys/class/leds/G/brightness
+echo 100 > /sys/class/leds/G1/brightness
+echo "GREEN1 ON"
+sleep 1
+echo 0 > /sys/class/leds/G1/brightness
+

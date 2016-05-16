@@ -1,0 +1,12 @@
+Build Instructions:
+-Enter Altera Embedded Shell
+>~/altera/14.0/embedded/embedded_command_shell.sh
+-Call make
+>make
+
+This will produce the fpgaddrtest binary
+
+Description:
+This is a simple applicition that will send a counting pattern to the FPGA DDR,
+which is connected to the HPS to FPGA AXI bridge. It will then read the pattern
+back from the FPGA DDR and check if it is valid.
