@@ -1,7 +1,7 @@
 set_global_assignment -name FAMILY "Cyclone V"
 set_global_assignment -name DEVICE 5CSXFC6C6U23C7
 set_global_assignment -name TOP_LEVEL_ENTITY dev_5csx_h6_42a_top
-set_global_assignment -name LAST_QUARTUS_VERSION 15.1.0
+set_global_assignment -name LAST_QUARTUS_VERSION 16.0.0
 set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 
 
@@ -78,10 +78,6 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to LED3
 
 
 
-set_global_assignment -name SDC_FILE dev_5csx_h6_42a.sdc
-set_global_assignment -name VHDL_FILE ./vhdl/dev_5csx_h6_42a_top.vhd
-set_global_assignment -name IPX_FILE dev_5csx_h6_42a.ipx
-set_global_assignment -name QIP_FILE dev_5csx_h6_42a/synthesis/dev_5csx_h6_42a.qip
 set_location_assignment PIN_A17 -to B7A_CAN0_RX
 set_location_assignment PIN_H17 -to B7A_CAN0_TX
 set_location_assignment PIN_B18 -to B7A_CAN1_RX
@@ -839,4 +835,12 @@ set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "2.5 V"
 set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to HSMC1_SMSDA
 set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to HSMC1_SMSCL
 
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name QIP_FILE dev_5csx_h6_42a/synthesis/dev_5csx_h6_42a.qip
+set_global_assignment -name SDC_FILE dev_5csx_h6_42a.sdc
+set_global_assignment -name VHDL_FILE ./vhdl/dev_5csx_h6_42a_top.vhd
+set_global_assignment -name IPX_FILE dev_5csx_h6_42a.ipx
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

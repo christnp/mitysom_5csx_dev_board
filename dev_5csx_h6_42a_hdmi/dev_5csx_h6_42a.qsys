@@ -92,7 +92,7 @@
       }
       datum megawizard_uipreferences
       {
-         value = "{}";
+         value = "{output_directory=/home/dvincelette/projects/5csx/mitysom-5cs/mitysom_5csx_dev_board/dev_5csx_h6_42a_hdmi, output_language=VERILOG}";
          type = "String";
       }
    }
@@ -121,7 +121,7 @@
       }
       datum sopceditor_expanded
       {
-         value = "0";
+         value = "1";
          type = "boolean";
       }
    }
@@ -307,7 +307,7 @@
    internal="pio_3.external_connection"
    type="conduit"
    dir="end" />
- <module name="clk_100Mhz" kind="clock_source" version="15.1" enabled="1">
+ <module name="clk_100Mhz" kind="clock_source" version="16.0" enabled="1">
   <parameter name="clockFrequency" value="100000000" />
   <parameter name="clockFrequencyKnown" value="true" />
   <parameter name="inputClockFrequency" value="0" />
@@ -316,7 +316,7 @@
  <module
    name="fpga_ddr"
    kind="altera_mem_if_ddr3_emif"
-   version="15.1"
+   version="16.0"
    enabled="1">
   <parameter name="ABSTRACT_REAL_COMPARE_TEST" value="false" />
   <parameter name="ABS_RAM_MEM_INIT_FILENAME" value="meminit" />
@@ -395,6 +395,7 @@
   <parameter name="ENABLE_USER_ECC" value="false" />
   <parameter name="EXPORT_AFI_HALF_CLK" value="false" />
   <parameter name="EXTRA_SETTINGS" value="" />
+  <parameter name="FIX_READ_LATENCY" value="8" />
   <parameter name="FORCED_NON_LDC_ADDR_CMD_MEM_CK_INVERT" value="false" />
   <parameter name="FORCED_NUM_WRITE_FR_CYCLE_SHIFTS" value="0" />
   <parameter name="FORCE_DQS_TRACKING" value="AUTO" />
@@ -635,7 +636,7 @@
   <parameter name="WEIGHT_PORT" value="0,0,0,0,0,0" />
   <parameter name="WRBUFFER_ADDR_WIDTH" value="6" />
  </module>
- <module name="hdmi_clk" kind="clock_source" version="15.1" enabled="1">
+ <module name="hdmi_clk" kind="clock_source" version="16.0" enabled="1">
   <parameter name="clockFrequency" value="75250000" />
   <parameter name="clockFrequencyKnown" value="true" />
   <parameter name="inputClockFrequency" value="74250000" />
@@ -691,7 +692,7 @@
   <parameter name="V_FRONT_PORCH" value="5" />
   <parameter name="V_SYNC_LENGTH" value="5" />
  </module>
- <module name="hdmi_pll" kind="altera_pll" version="15.1" enabled="1">
+ <module name="hdmi_pll" kind="altera_pll" version="16.0" enabled="1">
   <parameter name="debug_print_output" value="false" />
   <parameter name="debug_use_rbc_taf_method" value="false" />
   <parameter name="device" value="5CSXFC6C6U23C7" />
@@ -754,7 +755,7 @@
   <parameter name="gui_cascade_outclk_index" value="0" />
   <parameter name="gui_channel_spacing" value="0.0" />
   <parameter name="gui_clk_bad" value="false" />
-  <parameter name="gui_device_speed_grade" value="1" />
+  <parameter name="gui_device_speed_grade" value="2" />
   <parameter name="gui_divide_factor_c0" value="1" />
   <parameter name="gui_divide_factor_c1" value="1" />
   <parameter name="gui_divide_factor_c10" value="1" />
@@ -904,7 +905,7 @@
   <parameter name="DOUT1_SYMBOLS_PER_BEAT" value="0" />
   <parameter name="PARAMETERISATION"><![CDATA[<colourPatternRearrangerParams><CPR_NAME>Color Plane Sequencer</CPR_NAME><CPR_BPS>8</CPR_BPS><CPR_PORTS><INPUT_PORT><NAME>din0</NAME><STREAMING_DESCRIPTOR>[A:B:C:unnamed]</STREAMING_DESCRIPTOR><ENABLED>true</ENABLED></INPUT_PORT><INPUT_PORT><NAME>din1</NAME><STREAMING_DESCRIPTOR>[Channel]</STREAMING_DESCRIPTOR><ENABLED>false</ENABLED></INPUT_PORT><OUTPUT_PORT><NAME>dout0</NAME><STREAMING_DESCRIPTOR>[A:B:C]</STREAMING_DESCRIPTOR><ENABLED>true</ENABLED><NON_IMAGE_PACKET_SOURCE>din0</NON_IMAGE_PACKET_SOURCE><HALVE_WIDTH>true</HALVE_WIDTH></OUTPUT_PORT><OUTPUT_PORT><NAME>dout1</NAME><STREAMING_DESCRIPTOR>[Channel]</STREAMING_DESCRIPTOR><ENABLED>false</ENABLED><NON_IMAGE_PACKET_SOURCE>din0</NON_IMAGE_PACKET_SOURCE><HALVE_WIDTH>false</HALVE_WIDTH></OUTPUT_PORT></CPR_PORTS><CPR_INPUT_2_PIXELS>false</CPR_INPUT_2_PIXELS></colourPatternRearrangerParams>]]></parameter>
  </module>
- <module name="hps_0" kind="altera_hps" version="15.1" enabled="1">
+ <module name="hps_0" kind="altera_hps" version="16.0" enabled="1">
   <parameter name="ABSTRACT_REAL_COMPARE_TEST" value="false" />
   <parameter name="ABS_RAM_MEM_INIT_FILENAME" value="meminit" />
   <parameter name="ACV_PHY_CLK_ADD_FR_PHASE" value="0.0" />
@@ -979,8 +980,10 @@
   <parameter name="DUPLICATE_AC" value="false" />
   <parameter name="ED_EXPORT_SEQ_DEBUG" value="false" />
   <parameter name="EMAC0_Mode" value="N/A" />
+  <parameter name="EMAC0_PTP" value="false" />
   <parameter name="EMAC0_PinMuxing" value="Unused" />
   <parameter name="EMAC1_Mode" value="RGMII" />
+  <parameter name="EMAC1_PTP" value="false" />
   <parameter name="EMAC1_PinMuxing" value="HPS I/O Set 0" />
   <parameter name="ENABLE_ABS_RAM_MEM_INIT" value="false" />
   <parameter name="ENABLE_BONDING" value="false" />
@@ -1016,6 +1019,7 @@
   <parameter name="F2SDRAM_Width" value="128" />
   <parameter name="F2SINTERRUPT_Enable" value="true" />
   <parameter name="F2S_Width" value="0" />
+  <parameter name="FIX_READ_LATENCY" value="8" />
   <parameter name="FORCED_NON_LDC_ADDR_CMD_MEM_CK_INVERT" value="false" />
   <parameter name="FORCED_NUM_WRITE_FR_CYCLE_SHIFTS" value="0" />
   <parameter name="FORCE_DQS_TRACKING" value="AUTO" />
@@ -1435,24 +1439,21 @@
  <module
    name="mm_clock_crossing_bridge_0"
    kind="altera_avalon_mm_clock_crossing_bridge"
-   version="15.1"
+   version="16.0"
    enabled="1">
   <parameter name="ADDRESS_UNITS" value="SYMBOLS" />
   <parameter name="ADDRESS_WIDTH" value="28" />
-  <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone V" />
-  <parameter name="AUTO_M0_CLK_CLOCK_RATE" value="150000000" />
-  <parameter name="AUTO_S0_CLK_CLOCK_RATE" value="100000000" />
-  <parameter name="COMMAND_FIFO_DEPTH" value="512" />
+  <parameter name="COMMAND_FIFO_DEPTH" value="1024" />
   <parameter name="DATA_WIDTH" value="32" />
   <parameter name="MASTER_SYNC_DEPTH" value="4" />
-  <parameter name="MAX_BURST_SIZE" value="1" />
-  <parameter name="RESPONSE_FIFO_DEPTH" value="512" />
+  <parameter name="MAX_BURST_SIZE" value="8" />
+  <parameter name="RESPONSE_FIFO_DEPTH" value="1024" />
   <parameter name="SLAVE_SYNC_DEPTH" value="4" />
   <parameter name="SYMBOL_WIDTH" value="8" />
   <parameter name="SYSINFO_ADDR_WIDTH" value="28" />
-  <parameter name="USE_AUTO_ADDRESS_WIDTH" value="0" />
+  <parameter name="USE_AUTO_ADDRESS_WIDTH" value="1" />
  </module>
- <module name="pio_0" kind="altera_avalon_pio" version="15.1" enabled="1">
+ <module name="pio_0" kind="altera_avalon_pio" version="16.0" enabled="1">
   <parameter name="bitClearingEdgeCapReg" value="true" />
   <parameter name="bitModifyingOutReg" value="true" />
   <parameter name="captureEdge" value="true" />
@@ -1466,7 +1467,7 @@
   <parameter name="simDrivenValue" value="0" />
   <parameter name="width" value="32" />
  </module>
- <module name="pio_1" kind="altera_avalon_pio" version="15.1" enabled="1">
+ <module name="pio_1" kind="altera_avalon_pio" version="16.0" enabled="1">
   <parameter name="bitClearingEdgeCapReg" value="true" />
   <parameter name="bitModifyingOutReg" value="true" />
   <parameter name="captureEdge" value="true" />
@@ -1480,7 +1481,7 @@
   <parameter name="simDrivenValue" value="0" />
   <parameter name="width" value="32" />
  </module>
- <module name="pio_2" kind="altera_avalon_pio" version="15.1" enabled="1">
+ <module name="pio_2" kind="altera_avalon_pio" version="16.0" enabled="1">
   <parameter name="bitClearingEdgeCapReg" value="true" />
   <parameter name="bitModifyingOutReg" value="true" />
   <parameter name="captureEdge" value="true" />
@@ -1494,7 +1495,7 @@
   <parameter name="simDrivenValue" value="0" />
   <parameter name="width" value="32" />
  </module>
- <module name="pio_3" kind="altera_avalon_pio" version="15.1" enabled="1">
+ <module name="pio_3" kind="altera_avalon_pio" version="16.0" enabled="1">
   <parameter name="bitClearingEdgeCapReg" value="true" />
   <parameter name="bitModifyingOutReg" value="true" />
   <parameter name="captureEdge" value="true" />
@@ -1511,14 +1512,13 @@
  <module
    name="sysid_qsys"
    kind="altera_avalon_sysid_qsys"
-   version="15.1"
+   version="16.0"
    enabled="1">
-  <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone V" />
   <parameter name="id" value="1" />
  </module>
  <connection
    kind="avalon"
-   version="15.1"
+   version="16.0"
    start="hdmi_framereader.avalon_master"
    end="hps_0.f2h_sdram0_data">
   <parameter name="arbitrationPriority" value="1" />
@@ -1527,7 +1527,7 @@
  </connection>
  <connection
    kind="avalon"
-   version="15.1"
+   version="16.0"
    start="hps_0.h2f_axi_master"
    end="mm_clock_crossing_bridge_0.s0">
   <parameter name="arbitrationPriority" value="1" />
@@ -1536,7 +1536,7 @@
  </connection>
  <connection
    kind="avalon"
-   version="15.1"
+   version="16.0"
    start="hps_0.h2f_lw_axi_master"
    end="hdmi_framereader.avalon_slave">
   <parameter name="arbitrationPriority" value="1" />
@@ -1545,7 +1545,7 @@
  </connection>
  <connection
    kind="avalon"
-   version="15.1"
+   version="16.0"
    start="hps_0.h2f_lw_axi_master"
    end="sysid_qsys.control_slave">
   <parameter name="arbitrationPriority" value="1" />
@@ -1554,7 +1554,7 @@
  </connection>
  <connection
    kind="avalon"
-   version="15.1"
+   version="16.0"
    start="hps_0.h2f_lw_axi_master"
    end="pio_0.s1">
   <parameter name="arbitrationPriority" value="1" />
@@ -1563,7 +1563,7 @@
  </connection>
  <connection
    kind="avalon"
-   version="15.1"
+   version="16.0"
    start="hps_0.h2f_lw_axi_master"
    end="pio_1.s1">
   <parameter name="arbitrationPriority" value="1" />
@@ -1572,7 +1572,7 @@
  </connection>
  <connection
    kind="avalon"
-   version="15.1"
+   version="16.0"
    start="hps_0.h2f_lw_axi_master"
    end="pio_2.s1">
   <parameter name="arbitrationPriority" value="1" />
@@ -1581,7 +1581,7 @@
  </connection>
  <connection
    kind="avalon"
-   version="15.1"
+   version="16.0"
    start="hps_0.h2f_lw_axi_master"
    end="pio_3.s1">
   <parameter name="arbitrationPriority" value="1" />
@@ -1590,7 +1590,7 @@
  </connection>
  <connection
    kind="avalon"
-   version="15.1"
+   version="16.0"
    start="mm_clock_crossing_bridge_0.m0"
    end="fpga_ddr.avl">
   <parameter name="arbitrationPriority" value="1" />
@@ -1599,196 +1599,196 @@
  </connection>
  <connection
    kind="avalon_streaming"
-   version="15.1"
+   version="16.0"
    start="hdmi_framereader.avalon_streaming_source"
    end="hdmi_sequencer.din0" />
  <connection
    kind="avalon_streaming"
-   version="15.1"
+   version="16.0"
    start="hdmi_sequencer.dout0"
    end="hdmi_out.din" />
  <connection
    kind="clock"
-   version="15.1"
+   version="16.0"
    start="fpga_ddr.afi_clk"
    end="mm_clock_crossing_bridge_0.m0_clk" />
  <connection
    kind="clock"
-   version="15.1"
+   version="16.0"
    start="clk_100Mhz.clk"
    end="fpga_ddr.pll_ref_clk" />
  <connection
    kind="clock"
-   version="15.1"
+   version="16.0"
    start="hps_0.h2f_user0_clock"
    end="sysid_qsys.clk" />
  <connection
    kind="clock"
-   version="15.1"
+   version="16.0"
    start="hps_0.h2f_user0_clock"
    end="pio_0.clk" />
  <connection
    kind="clock"
-   version="15.1"
+   version="16.0"
    start="hps_0.h2f_user0_clock"
    end="pio_1.clk" />
  <connection
    kind="clock"
-   version="15.1"
+   version="16.0"
    start="hps_0.h2f_user0_clock"
    end="pio_2.clk" />
  <connection
    kind="clock"
-   version="15.1"
+   version="16.0"
    start="hps_0.h2f_user0_clock"
    end="pio_3.clk" />
  <connection
    kind="clock"
-   version="15.1"
+   version="16.0"
    start="hps_0.h2f_user0_clock"
    end="hdmi_framereader.clock_master" />
  <connection
    kind="clock"
-   version="15.1"
+   version="16.0"
    start="hps_0.h2f_user0_clock"
    end="hps_0.f2h_sdram0_clock" />
  <connection
    kind="clock"
-   version="15.1"
+   version="16.0"
    start="hps_0.h2f_user0_clock"
    end="hps_0.h2f_axi_clock" />
  <connection
    kind="clock"
-   version="15.1"
+   version="16.0"
    start="hps_0.h2f_user0_clock"
    end="hps_0.h2f_lw_axi_clock" />
  <connection
    kind="clock"
-   version="15.1"
+   version="16.0"
    start="hps_0.h2f_user0_clock"
    end="hdmi_pll.refclk" />
  <connection
    kind="clock"
-   version="15.1"
+   version="16.0"
    start="hps_0.h2f_user0_clock"
    end="mm_clock_crossing_bridge_0.s0_clk" />
  <connection
    kind="clock"
-   version="15.1"
+   version="16.0"
    start="hdmi_pll.outclk0"
    end="hdmi_clk.clk_in" />
  <connection
    kind="clock"
-   version="15.1"
+   version="16.0"
    start="hdmi_pll.outclk0"
    end="hdmi_sequencer.clock" />
  <connection
    kind="clock"
-   version="15.1"
+   version="16.0"
    start="hdmi_pll.outclk0"
    end="hdmi_framereader.clock_reset" />
  <connection
    kind="clock"
-   version="15.1"
+   version="16.0"
    start="hdmi_pll.outclk0"
    end="hdmi_out.is_clk_rst" />
  <connection
    kind="interrupt"
-   version="15.1"
+   version="16.0"
    start="hps_0.f2h_irq0"
    end="hdmi_framereader.interrupt_sender">
   <parameter name="irqNumber" value="4" />
  </connection>
  <connection
    kind="interrupt"
-   version="15.1"
+   version="16.0"
    start="hps_0.f2h_irq0"
    end="pio_0.irq">
   <parameter name="irqNumber" value="0" />
  </connection>
  <connection
    kind="interrupt"
-   version="15.1"
+   version="16.0"
    start="hps_0.f2h_irq0"
    end="pio_1.irq">
   <parameter name="irqNumber" value="1" />
  </connection>
  <connection
    kind="interrupt"
-   version="15.1"
+   version="16.0"
    start="hps_0.f2h_irq0"
    end="pio_2.irq">
   <parameter name="irqNumber" value="2" />
  </connection>
  <connection
    kind="interrupt"
-   version="15.1"
+   version="16.0"
    start="hps_0.f2h_irq0"
    end="pio_3.irq">
   <parameter name="irqNumber" value="3" />
  </connection>
  <connection
    kind="reset"
-   version="15.1"
+   version="16.0"
    start="fpga_ddr.afi_reset"
    end="mm_clock_crossing_bridge_0.m0_reset" />
  <connection
    kind="reset"
-   version="15.1"
+   version="16.0"
    start="hps_0.h2f_reset"
    end="clk_100Mhz.clk_in_reset" />
  <connection
    kind="reset"
-   version="15.1"
+   version="16.0"
    start="hps_0.h2f_reset"
    end="hdmi_clk.clk_in_reset" />
  <connection
    kind="reset"
-   version="15.1"
+   version="16.0"
    start="hps_0.h2f_reset"
    end="hdmi_framereader.clock_master_reset" />
  <connection
    kind="reset"
-   version="15.1"
+   version="16.0"
    start="hps_0.h2f_reset"
    end="hdmi_framereader.clock_reset_reset" />
  <connection
    kind="reset"
-   version="15.1"
+   version="16.0"
    start="hps_0.h2f_reset"
    end="fpga_ddr.global_reset" />
  <connection
    kind="reset"
-   version="15.1"
+   version="16.0"
    start="hps_0.h2f_reset"
    end="hdmi_out.is_clk_rst_reset" />
  <connection
    kind="reset"
-   version="15.1"
+   version="16.0"
    start="hps_0.h2f_reset"
    end="sysid_qsys.reset" />
- <connection kind="reset" version="15.1" start="hps_0.h2f_reset" end="pio_0.reset" />
- <connection kind="reset" version="15.1" start="hps_0.h2f_reset" end="pio_1.reset" />
- <connection kind="reset" version="15.1" start="hps_0.h2f_reset" end="pio_2.reset" />
- <connection kind="reset" version="15.1" start="hps_0.h2f_reset" end="pio_3.reset" />
+ <connection kind="reset" version="16.0" start="hps_0.h2f_reset" end="pio_0.reset" />
+ <connection kind="reset" version="16.0" start="hps_0.h2f_reset" end="pio_1.reset" />
+ <connection kind="reset" version="16.0" start="hps_0.h2f_reset" end="pio_2.reset" />
+ <connection kind="reset" version="16.0" start="hps_0.h2f_reset" end="pio_3.reset" />
  <connection
    kind="reset"
-   version="15.1"
+   version="16.0"
    start="hps_0.h2f_reset"
    end="hdmi_sequencer.reset" />
  <connection
    kind="reset"
-   version="15.1"
+   version="16.0"
    start="hps_0.h2f_reset"
    end="hdmi_pll.reset" />
  <connection
    kind="reset"
-   version="15.1"
+   version="16.0"
    start="hps_0.h2f_reset"
    end="mm_clock_crossing_bridge_0.s0_reset" />
  <connection
    kind="reset"
-   version="15.1"
+   version="16.0"
    start="hps_0.h2f_reset"
    end="fpga_ddr.soft_reset" />
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />

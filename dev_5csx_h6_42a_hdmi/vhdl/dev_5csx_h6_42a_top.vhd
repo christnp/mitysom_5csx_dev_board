@@ -396,6 +396,16 @@ architecture rtl of dev_5csx_h6_42a_top is
 	signal s_i2c_sda_en : std_logic := '0';
 	signal s_i2c_scl_en : std_logic := '0';
 
+	signal s_i2c_clkin_meta : std_logic := '0';
+	signal s_i2c_clkin : std_logic := '0';
+	signal s_i2c_sdain_meta : std_logic := '0';
+	signal s_i2c_sdain : std_logic := '0';
+	signal s_vclk : std_logic := '0';
+	 signal hps_scl_debounce : std_logic_vector(3 downto 0) := (others=>'1'); 
+	 signal hps_sda_debounce : std_logic_vector(4 downto 0) := (others=>'1');
+	 signal hps_scl : std_logic := '1';
+	 signal hps_sda : std_logic := '1';
+
 begin                                   -- architecture rtl
 
 	----------------------------------------------------------------------------
@@ -646,11 +656,11 @@ begin                                   -- architecture rtl
 			hdmi_out_vid_f                  => open,
 			hdmi_out_vid_h                  => open,
 			hdmi_out_vid_v                  => open,
-			clk_clk                         => HSMC1_CLKOUT1,
+			clk_clk                         => s_vclk,--HSMC1_CLKOUT1,
 			i2c2_out_data                   => s_i2c_sda_en,
-			i2c2_sda                        => HSMC1_SMSDA,
+			i2c2_sda                        => hps_sda,--HSMC1_SMSDA,
 			i2c2_clk_clk                    => s_i2c_scl_en,
-			i2c2_scl_in_clk                 => HSMC1_SMSCL
+			i2c2_scl_in_clk                 => hps_scl--HSMC1_SMSCL
 		);
 		
 	-- Disable TX HDCP enable
@@ -660,6 +670,30 @@ begin                                   -- architecture rtl
 	-- Tri-state the I2C interface to the HSMC card
 	HSMC1_SMSDA  <= 'Z' when s_i2c_sda_en = '0' else '0';
 	HSMC1_SMSCL  <= 'Z' when s_i2c_scl_en = '0' else '0';
+
+
+	HSMC1_CLKOUT1 <= s_vclk;
+
+	i2c_sampling : process(s_vclk)
+	begin
+		if rising_edge(s_vclk) then
+			hps_scl_debounce <= hps_scl_debounce(hps_scl_debounce'high-1 downto 0) & HSMC1_SMSCL;
+			hps_sda_debounce <= hps_sda_debounce(hps_sda_debounce'high-1 downto 0) & HSMC1_SMSDA;
+			if hps_scl_debounce = "1111" then
+				hps_scl <= '1';
+			elsif hps_scl_debounce = "0000" then
+				hps_scl <= '0';
+			end if;
+
+			if hps_sda_debounce = "11111" then
+				hps_sda <= '1';
+			elsif hps_sda_debounce = "00000" then
+				hps_sda <= '0';
+			end if;
+		end if;
+	end process;
+
+
 
 end architecture rtl;
 
