@@ -24,36 +24,64 @@ derive_clock_uncertainty
 
 create_generated_clock -name HDMI_TX_CLK -source [get_pins {u0|hdmi_pll|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}] [get_ports {HSMC1_CLKOUT1}]
 
+set skew 0.05
+set_output_delay -max -clock HDMI_TX_CLK [expr { 1.0 + $skew }] [get_ports HSMC1_RX11] -add_delay
+set_output_delay -min -clock HDMI_TX_CLK [expr { -0.7 - $skew }] [get_ports HSMC1_RX11] -add_delay
+set_output_delay -max -clock HDMI_TX_CLK [expr { 1.0 + $skew }] [get_ports HSMC1_TX16_N] -add_delay
+set_output_delay -min -clock HDMI_TX_CLK [expr { -0.7 - $skew }] [get_ports HSMC1_TX16_N] -add_delay
+set_output_delay -max -clock HDMI_TX_CLK [expr { 1.0 + $skew }] [get_ports HSMC1_TX16] -add_delay
+set_output_delay -min -clock HDMI_TX_CLK [expr { -0.7 - $skew }] [get_ports HSMC1_TX16] -add_delay
+set_output_delay -max -clock HDMI_TX_CLK [expr { 1.0 + $skew }] [get_ports HSMC1_RX16_N] -add_delay
+set_output_delay -min -clock HDMI_TX_CLK [expr { -0.7 - $skew }] [get_ports HSMC1_RX16_N] -add_delay
+set_output_delay -max -clock HDMI_TX_CLK [expr { 1.0 + $skew }] [get_ports HSMC1_RX16] -add_delay
+set_output_delay -min -clock HDMI_TX_CLK [expr { -0.7 - $skew }] [get_ports HSMC1_RX16] -add_delay
+set_output_delay -max -clock HDMI_TX_CLK [expr { 1.0 + $skew }] [get_ports HSMC1_RX15_N] -add_delay
+set_output_delay -min -clock HDMI_TX_CLK [expr { -0.7 - $skew }] [get_ports HSMC1_RX15_N] -add_delay
+set_output_delay -max -clock HDMI_TX_CLK [expr { 1.0 + $skew }] [get_ports HSMC1_RX15] -add_delay
+set_output_delay -min -clock HDMI_TX_CLK [expr { -0.7 - $skew }] [get_ports HSMC1_RX15] -add_delay
+set_output_delay -max -clock HDMI_TX_CLK [expr { 1.0 + $skew }] [get_ports HSMC1_RX14_N] -add_delay
+set_output_delay -min -clock HDMI_TX_CLK [expr { -0.7 - $skew }] [get_ports HSMC1_RX14_N] -add_delay
+set_output_delay -max -clock HDMI_TX_CLK [expr { 1.0 + $skew }] [get_ports HSMC1_RX14] -add_delay
+set_output_delay -min -clock HDMI_TX_CLK [expr { -0.7 - $skew }] [get_ports HSMC1_RX14] -add_delay
+set_output_delay -max -clock HDMI_TX_CLK [expr { 1.0 + $skew }] [get_ports HSMC1_RX13_N] -add_delay
+set_output_delay -min -clock HDMI_TX_CLK [expr { -0.7 - $skew }] [get_ports HSMC1_RX13_N] -add_delay
+set_output_delay -max -clock HDMI_TX_CLK [expr { 1.0 + $skew }] [get_ports HSMC1_RX13] -add_delay
+set_output_delay -min -clock HDMI_TX_CLK [expr { -0.7 - $skew }] [get_ports HSMC1_RX13] -add_delay
+set_output_delay -max -clock HDMI_TX_CLK [expr { 1.0 + $skew }] [get_ports HSMC1_RX12_N] -add_delay
+set_output_delay -min -clock HDMI_TX_CLK [expr { -0.7 - $skew }] [get_ports HSMC1_RX12_N] -add_delay
+set_output_delay -max -clock HDMI_TX_CLK [expr { 1.0 + $skew }] [get_ports HSMC1_RX12] -add_delay
+set_output_delay -min -clock HDMI_TX_CLK [expr { -0.7 - $skew }] [get_ports HSMC1_RX12] -add_delay
+set_output_delay -max -clock HDMI_TX_CLK [expr { 1.0 + $skew }] [get_ports HSMC1_RX11_N] -add_delay
+set_output_delay -min -clock HDMI_TX_CLK [expr { -0.7 - $skew }] [get_ports HSMC1_RX11_N] -add_delay
+set_output_delay -max -clock HDMI_TX_CLK [expr { 1.0 + $skew }] [get_ports HSMC1_RX11] -add_delay
+set_output_delay -min -clock HDMI_TX_CLK [expr { -0.7 - $skew }] [get_ports HSMC1_RX11] -add_delay
+set_output_delay -max -clock HDMI_TX_CLK [expr { 1.0 + $skew }] [get_ports HSMC1_RX10_N] -add_delay
+set_output_delay -min -clock HDMI_TX_CLK [expr { -0.7 - $skew }] [get_ports HSMC1_RX10_N] -add_delay
+set_output_delay -max -clock HDMI_TX_CLK [expr { 1.0 + $skew }] [get_ports HSMC1_RX10] -add_delay
+set_output_delay -min -clock HDMI_TX_CLK [expr { -0.7 - $skew }] [get_ports HSMC1_RX10] -add_delay
+set_output_delay -max -clock HDMI_TX_CLK [expr { 1.0 + $skew }] [get_ports HSMC1_RX9_N] -add_delay
+set_output_delay -min -clock HDMI_TX_CLK [expr { -0.7 - $skew }] [get_ports HSMC1_RX9_N] -add_delay
+set_output_delay -max -clock HDMI_TX_CLK [expr { 1.0 + $skew }] [get_ports HSMC1_RX9] -add_delay
+set_output_delay -min -clock HDMI_TX_CLK [expr { -0.7 - $skew }] [get_ports HSMC1_RX9] -add_delay
+set_output_delay -max -clock HDMI_TX_CLK [expr { 1.0 + $skew }] [get_ports HSMC1_RX8_N] -add_delay
+set_output_delay -min -clock HDMI_TX_CLK [expr { -0.7 - $skew }] [get_ports HSMC1_RX8_N] -add_delay
+set_output_delay -max -clock HDMI_TX_CLK [expr { 1.0 + $skew }] [get_ports HSMC1_RX8] -add_delay
+set_output_delay -min -clock HDMI_TX_CLK [expr { -0.7 - $skew }] [get_ports HSMC1_RX8] -add_delay
+set_output_delay -max -clock HDMI_TX_CLK [expr { 1.0 + $skew }] [get_ports HSMC1_TX8_N] -add_delay
+set_output_delay -min -clock HDMI_TX_CLK [expr { -0.7 - $skew }] [get_ports HSMC1_TX8_N] -add_delay
+set_output_delay -max -clock HDMI_TX_CLK [expr { 1.0 + $skew }] [get_ports HSMC1_TX8] -add_delay
+set_output_delay -min -clock HDMI_TX_CLK [expr { -0.7 - $skew }] [get_ports HSMC1_TX8] -add_delay
+set_output_delay -max -clock HDMI_TX_CLK [expr { 1.0 + $skew }] [get_ports HSMC1_TX7_N] -add_delay
+set_output_delay -min -clock HDMI_TX_CLK [expr { -0.7 - $skew }] [get_ports HSMC1_TX7_N] -add_delay
+set_output_delay -max -clock HDMI_TX_CLK [expr { 1.0 + $skew }] [get_ports HSMC1_TX7] -add_delay
+set_output_delay -min -clock HDMI_TX_CLK [expr { -0.7 - $skew }] [get_ports HSMC1_TX7] -add_delay
+set_output_delay -max -clock HDMI_TX_CLK [expr { 1.0 + $skew }] [get_ports HSMC1_TX10_N] -add_delay
+set_output_delay -min -clock HDMI_TX_CLK [expr { -0.10 - $skew }] [get_ports HSMC1_TX7_N] -add_delay
+set_output_delay -max -clock HDMI_TX_CLK [expr { 1.0 + $skew }] [get_ports HSMC1_TX11_N] -add_delay
+set_output_delay -min -clock HDMI_TX_CLK [expr { -0.11 - $skew }] [get_ports HSMC1_TX7_N] -add_delay
+set_output_delay -max -clock HDMI_TX_CLK [expr { 1.0 + $skew }] [get_ports HSMC1_TX11] -add_delay
+set_output_delay -min -clock HDMI_TX_CLK [expr { -0.11 - $skew }] [get_ports HSMC1_TX7] -add_delay
 # Set output delays on data and control
-set_output_delay -clock { HDMI_TX_CLK } 2 [get_ports {HSMC1_RX11}]
-set_output_delay -clock { HDMI_TX_CLK } 2 [get_ports {HSMC1_TX16_N}]
-set_output_delay -clock { HDMI_TX_CLK } 2 [get_ports {HSMC1_TX16}]
-set_output_delay -clock { HDMI_TX_CLK } 2 [get_ports {HSMC1_RX16_N}]
-set_output_delay -clock { HDMI_TX_CLK } 2 [get_ports {HSMC1_RX16}]
-set_output_delay -clock { HDMI_TX_CLK } 2 [get_ports {HSMC1_RX15_N}]
-set_output_delay -clock { HDMI_TX_CLK } 2 [get_ports {HSMC1_RX15}]
-set_output_delay -clock { HDMI_TX_CLK } 2 [get_ports {HSMC1_RX14_N}]
-set_output_delay -clock { HDMI_TX_CLK } 2 [get_ports {HSMC1_RX14}]
-set_output_delay -clock { HDMI_TX_CLK } 2 [get_ports {HSMC1_RX13_N}]
-set_output_delay -clock { HDMI_TX_CLK } 2 [get_ports {HSMC1_RX13}]
-set_output_delay -clock { HDMI_TX_CLK } 2 [get_ports {HSMC1_RX12_N}]
-set_output_delay -clock { HDMI_TX_CLK } 2 [get_ports {HSMC1_RX12}]
-set_output_delay -clock { HDMI_TX_CLK } 2 [get_ports {HSMC1_RX11_N}]
-set_output_delay -clock { HDMI_TX_CLK } 2 [get_ports {HSMC1_RX11}]
-set_output_delay -clock { HDMI_TX_CLK } 2 [get_ports {HSMC1_RX10_N}]
-set_output_delay -clock { HDMI_TX_CLK } 2 [get_ports {HSMC1_RX10}]
-set_output_delay -clock { HDMI_TX_CLK } 2 [get_ports {HSMC1_RX9_N}]
-set_output_delay -clock { HDMI_TX_CLK } 2 [get_ports {HSMC1_RX9}]
-set_output_delay -clock { HDMI_TX_CLK } 2 [get_ports {HSMC1_RX8_N}]
-set_output_delay -clock { HDMI_TX_CLK } 2 [get_ports {HSMC1_RX8}]
-set_output_delay -clock { HDMI_TX_CLK } 2 [get_ports {HSMC1_TX8_N}]
-set_output_delay -clock { HDMI_TX_CLK } 2 [get_ports {HSMC1_TX8}]
-set_output_delay -clock { HDMI_TX_CLK } 2 [get_ports {HSMC1_TX7_N}]
-set_output_delay -clock { HDMI_TX_CLK } 2 [get_ports {HSMC1_TX7}]
-set_output_delay -clock { HDMI_TX_CLK } 2 [get_ports {HSMC1_TX10_N}]
-set_output_delay -clock { HDMI_TX_CLK } 2 [get_ports {HSMC1_TX11}]
-set_output_delay -clock { HDMI_TX_CLK } 2 [get_ports {HSMC1_TX11_N}]
-
 set_false_path -from * -to [get_ports {HSMC1_CLKOUT1}]
 
 # Set false paths for HPS IO (it's in hard silicone)
