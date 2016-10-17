@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system name="$${FILENAME}">
+ <component
+   name="$${FILENAME}"
+   displayName="$${FILENAME}"
+   version="1.0"
+   description=""
+   tags=""
+   categories="System" />
+ <parameter name="bonusData"><![CDATA[bonusData 
+{
+   element acl_iface
+   {
+      datum _sortIndex
+      {
+         value = "0";
+         type = "int";
+      }
+   }
+   element acl_iface.kernel_mem0
+   {
+      datum _lockedAddress
+      {
+         value = "1";
+         type = "boolean";
+      }
+   }
+   element dma_read_master_0
+   {
+      datum _sortIndex
+      {
+         value = "1";
+         type = "int";
+      }
+   }
+   element modular_sgdma_dispatcher_0
+   {
+      datum _sortIndex
+      {
+         value = "2";
+         type = "int";
+      }
+   }
+   element modular_sgdma_dispatcher_0.Descriptor_Slave
+   {
+      datum baseAddress
+      {
+         value = "4096";
+         type = "String";
+      }
+   }
+   element sysid_qsys_0
+   {
+      datum _sortIndex
+      {
+         value = "3";
+         type = "int";
+      }
+   }
+   element sysid_qsys_0.control_slave
+   {
+      datum baseAddress
+      {
+         value = "8192";
+         type = "String";
+      }
+   }
+}
+]]></parameter>
+ <parameter name="clockCrossingAdapter" value="FIFO" />
+ <parameter name="device" value="5CSXFC6C6U23C7" />
+ <parameter name="deviceFamily" value="Cyclone V" />
+ <parameter name="deviceSpeedGrade" value="7_H6" />
+ <parameter name="fabricMode" value="QSYS" />
+ <parameter name="generateLegacySim" value="false" />
+ <parameter name="generationId" value="0" />
+ <parameter name="globalResetBus" value="false" />
+ <parameter name="hdlLanguage" value="VERILOG" />
+ <parameter name="hideFromIPCatalog" value="false" />
+ <parameter name="lockedInterfaceDefinition" value="" />
+ <parameter name="maxAdditionalLatency" value="0" />
+ <parameter name="projectName" value="top.qpf" />
+ <parameter name="sopcBorderPoints" value="false" />
+ <parameter name="systemHash" value="0" />
+ <parameter name="testBenchDutName" value="" />
+ <parameter name="timeStamp" value="0" />
+ <parameter name="useTestBenchNamingPattern" value="false" />
+ <instanceScript></instanceScript>
+ <interface
+   name="data_source"
+   internal="dma_read_master_0.Data_Source"
+   type="avalon_streaming"
+   dir="start" />
+ <interface name="fpga_memory" internal="acl_iface.fpga_memory" />
+ <interface name="fpga_memory_oct" internal="acl_iface.fpga_memory_oct" />
+ <interface
+   name="fpga_sdram_pll_sharing"
+   internal="acl_iface.fpga_sdram_pll_sharing" />
+ <interface name="fpga_sdram_status" internal="acl_iface.fpga_sdram_status" />
+ <interface
+   name="kernel_clk"
+   internal="acl_iface.kernel_clk_snoop"
+   type="clock"
+   dir="start" />
+ <interface name="memory" internal="acl_iface.memory" type="conduit" dir="end" />
+ <interface
+   name="peripheral"
+   internal="acl_iface.peripheral"
+   type="conduit"
+   dir="end" />
+ <module name="acl_iface" kind="acl_iface_system" version="1.0" enabled="1">
+  <parameter name="AUTO_DEVICE" value="5CSXFC6C6U23C7" />
+  <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone V" />
+  <parameter name="AUTO_DEVICE_SPEEDGRADE" value="7_H6" />
+  <parameter name="AUTO_EXT_LOGIC_BRIDGE_M0_ADDRESS_MAP"><![CDATA[<address-map><slave name='modular_sgdma_dispatcher_0.CSR' start='0x0' end='0x20' /><slave name='modular_sgdma_dispatcher_0.Descriptor_Slave' start='0x1000' end='0x1020' /><slave name='sysid_qsys_0.control_slave' start='0x2000' end='0x2008' /></address-map>]]></parameter>
+  <parameter
+     name="AUTO_EXT_LOGIC_BRIDGE_M0_ADDRESS_WIDTH"
+     value="AddressWidth = 14" />
+  <parameter name="AUTO_GENERATION_ID" value="0" />
+  <parameter name="AUTO_HPS_F2H_AXI_CLOCK_CLOCK_DOMAIN" value="3" />
+  <parameter name="AUTO_HPS_F2H_AXI_CLOCK_CLOCK_RATE" value="50000000" />
+  <parameter name="AUTO_HPS_F2H_AXI_CLOCK_RESET_DOMAIN" value="3" />
+  <parameter name="AUTO_KERNEL_CRA_ADDRESS_MAP" value="" />
+  <parameter name="AUTO_KERNEL_CRA_ADDRESS_WIDTH" value="AddressWidth = -1" />
+  <parameter name="AUTO_KERNEL_IRQ_INTERRUPTS_USED" value="0" />
+  <parameter name="AUTO_UNIQUE_ID">$${FILENAME}_acl_iface</parameter>
+ </module>
+ <module
+   name="dma_read_master_0"
+   kind="dma_read_master"
+   version="16.0"
+   enabled="1">
+  <parameter name="BURST_ENABLE" value="1" />
+  <parameter name="CHANNEL_ENABLE" value="0" />
+  <parameter name="CHANNEL_WIDTH" value="8" />
+  <parameter name="DATA_WIDTH" value="64" />
+  <parameter name="ERROR_ENABLE" value="0" />
+  <parameter name="ERROR_WIDTH" value="8" />
+  <parameter name="FIFO_DEPTH" value="1024" />
+  <parameter name="FIFO_SPEED_OPTIMIZATION" value="1" />
+  <parameter name="FIX_ADDRESS_WIDTH" value="32" />
+  <parameter name="GUI_BURST_WRAPPING_SUPPORT" value="0" />
+  <parameter name="GUI_MAX_BURST_COUNT" value="128" />
+  <parameter name="GUI_PROGRAMMABLE_BURST_ENABLE" value="0" />
+  <parameter name="GUI_STRIDE_WIDTH" value="1" />
+  <parameter name="LENGTH_WIDTH" value="32" />
+  <parameter name="PACKET_ENABLE" value="0" />
+  <parameter name="STRIDE_ENABLE" value="0" />
+  <parameter name="TRANSFER_TYPE" value="Aligned Accesses" />
+  <parameter name="USE_FIX_ADDRESS_WIDTH" value="0" />
+ </module>
+ <module
+   name="modular_sgdma_dispatcher_0"
+   kind="modular_sgdma_dispatcher"
+   version="16.0"
+   enabled="1">
+  <parameter name="BURST_ENABLE" value="0" />
+  <parameter name="BURST_WRAPPING_SUPPORT" value="0" />
+  <parameter name="CSR_ADDRESS_WIDTH" value="3" />
+  <parameter name="DATA_FIFO_DEPTH" value="32" />
+  <parameter name="DATA_WIDTH" value="32" />
+  <parameter name="DESCRIPTOR_FIFO_DEPTH" value="16" />
+  <parameter name="ENHANCED_FEATURES" value="1" />
+  <parameter name="GUI_RESPONSE_PORT" value="0" />
+  <parameter name="MAX_BURST_COUNT" value="2" />
+  <parameter name="MAX_BYTE" value="1024" />
+  <parameter name="MAX_STRIDE" value="1" />
+  <parameter name="MODE" value="1" />
+  <parameter name="PREFETCHER_USE_CASE" value="0" />
+  <parameter name="PROGRAMMABLE_BURST_ENABLE" value="0" />
+  <parameter name="STRIDE_ENABLE" value="0" />
+  <parameter name="TRANSFER_TYPE" value="Aligned Accesses" />
+ </module>
+ <module
+   name="sysid_qsys_0"
+   kind="altera_avalon_sysid_qsys"
+   version="16.0"
+   enabled="1">
+  <parameter name="id" value="-1091581186" />
+ </module>
+ <connection
+   kind="avalon"
+   version="16.0"
+   start="dma_read_master_0.Data_Read_Master"
+   end="acl_iface.hps_f2h_axi_slave">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="16.0"
+   start="acl_iface.ext_logic_bridge_m0"
+   end="modular_sgdma_dispatcher_0.CSR">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="16.0"
+   start="acl_iface.ext_logic_bridge_m0"
+   end="modular_sgdma_dispatcher_0.Descriptor_Slave">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x1000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="16.0"
+   start="acl_iface.ext_logic_bridge_m0"
+   end="sysid_qsys_0.control_slave">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x2000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon_streaming"
+   version="16.0"
+   start="modular_sgdma_dispatcher_0.Read_Command_Source"
+   end="dma_read_master_0.Command_Sink" />
+ <connection
+   kind="avalon_streaming"
+   version="16.0"
+   start="dma_read_master_0.Response_Source"
+   end="modular_sgdma_dispatcher_0.Read_Response_Sink" />
+ <connection
+   kind="clock"
+   version="16.0"
+   start="acl_iface.kernel_clk"
+   end="dma_read_master_0.Clock" />
+ <connection
+   kind="clock"
+   version="16.0"
+   start="acl_iface.kernel_clk"
+   end="sysid_qsys_0.clk" />
+ <connection
+   kind="clock"
+   version="16.0"
+   start="acl_iface.kernel_clk"
+   end="modular_sgdma_dispatcher_0.clock" />
+ <connection
+   kind="clock"
+   version="16.0"
+   start="acl_iface.kernel_clk"
+   end="acl_iface.hps_f2h_axi_clock" />
+ <connection
+   kind="reset"
+   version="16.0"
+   start="acl_iface.global_reset"
+   end="dma_read_master_0.Clock_reset" />
+ <connection
+   kind="reset"
+   version="16.0"
+   start="acl_iface.global_reset"
+   end="modular_sgdma_dispatcher_0.clock_reset" />
+ <connection
+   kind="reset"
+   version="16.0"
+   start="acl_iface.global_reset"
+   end="sysid_qsys_0.reset" />
+ <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="FIFO" />
+ <interconnectRequirement for="$system" name="qsys_mm.maxAdditionalLatency" value="0" />
+</system>
