@@ -15,6 +15,7 @@ public:
 	tcFPGARegister(uint32_t anBaseAddr, uint32_t anLength)
 		:mpRegister(NULL)
 		, mnLength(anLength)
+		, mnPhysAddr(anBaseAddr)
 	{
 		mbSuccess = true;
 		int fd;
@@ -106,9 +107,21 @@ public:
 		return mpRegister[offset];
 	}
 
+	void* GetMappedAddr(void)
+	{
+		return (void *)mpRegister;
+	}
+
+	uint32_t GetPhysAddr(void)
+	{
+		return mnPhysAddr;
+	}
+
+
 private:
 	volatile type *mpRegister;
 	uint32_t mnLength;
+	uint32_t mnPhysAddr;
 
 	bool mbSuccess;
 };

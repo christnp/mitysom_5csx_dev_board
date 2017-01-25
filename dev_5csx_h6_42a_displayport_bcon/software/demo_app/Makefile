@@ -22,7 +22,7 @@ CPPFLAGS += -I${LIBFPGA}
 # Rules for building
 all: $(NAME)
 
-$(NAME): main.o BCONInput.o ${LIBFPGA}/pll_reconfig.o GenICamModel.o VIPMixerII.o Filter2D.o
+$(NAME): main.o BCONInput.o ${LIBFPGA}/pll_reconfig.o GenICamModel.o VIPMixerII.o Filter2D.o FrameBufferII.o
 	$(LD) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
 .cpp.o: 

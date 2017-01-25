@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1920"
+   height="750"
+   viewBox="0 0 508 198.4375"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.0 r15299"
+   sodipodi:docname="DemoText.svg">
+  <defs
+     id="defs2">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient4557">
+      <stop
+         style="stop-color:#0021e4;stop-opacity:1;"
+         offset="0"
+         id="stop4553" />
+      <stop
+         style="stop-color:#0021e4;stop-opacity:0;"
+         offset="1"
+         id="stop4555" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4557"
+       id="linearGradient4569"
+       x1="66.669502"
+       y1="201.89314"
+       x2="630.70624"
+       y2="201.89314"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4557"
+       id="linearGradient4571"
+       x1="9.2354164"
+       y1="172.98299"
+       x2="688.14026"
+       y2="172.98299"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4557"
+       id="linearGradient4573"
+       x1="32.376587"
+       y1="144.07281"
+       x2="664.99908"
+       y2="144.07281"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4557"
+       id="linearGradient4575"
+       x1="19.341152"
+       y1="115.16264"
+       x2="668.79907"
+       y2="115.16264"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4557"
+       id="linearGradient4577"
+       x1="88.391006"
+       y1="86.25248"
+       x2="608.98468"
+       y2="86.25248"
+       gradientUnits="userSpaceOnUse" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4557"
+       id="radialGradient4617"
+       cx="425.9892"
+       cy="44.764053"
+       fx="425.9892"
+       fy="44.764053"
+       r="254"
+       gradientTransform="matrix(1,0,0,0.078125,-171.98923,273.65908)"
+       gradientUnits="userSpaceOnUse" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4557"
+       id="radialGradient4617-7"
+       cx="425.9892"
+       cy="44.764053"
+       fx="425.9892"
+       fy="44.764053"
+       r="254"
+       gradientTransform="matrix(1,0,0,0.078125,-171.98924,233.97158)"
+       gradientUnits="userSpaceOnUse" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4557"
+       id="radialGradient4617-1"
+       cx="425.9892"
+       cy="44.764053"
+       fx="425.9892"
+       fy="44.764053"
+       r="254"
+       gradientTransform="matrix(1,0,0,0.078125,-171.98922,194.28408)"
+       gradientUnits="userSpaceOnUse" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4557"
+       id="radialGradient4617-9"
+       cx="425.9892"
+       cy="44.764053"
+       fx="425.9892"
+       fy="44.764053"
+       r="254"
+       gradientTransform="matrix(1,0,0,0.078125,-171.98922,154.59658)"
+       gradientUnits="userSpaceOnUse" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4557"
+       id="radialGradient4617-5"
+       cx="425.9892"
+       cy="44.764053"
+       fx="425.9892"
+       fy="44.764053"
+       r="254"
+       gradientTransform="matrix(1,0,0,0.078125,-171.98923,114.90907)"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="1296.4123"
+     inkscape:cy="525.91341"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-98.562508)">
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke:url(#radialGradient4617);stroke-width:0.31225026;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4599"
+       width="507.68774"
+       height="39.375248"
+       x="0.15612513"
+       y="257.46863" />
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke:url(#radialGradient4617-7);stroke-width:0.31225026;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4599-9"
+       width="507.68774"
+       height="39.375248"
+       x="0.15612513"
+       y="217.78113" />
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke:url(#radialGradient4617-1);stroke-width:0.31225026;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4599-1"
+       width="507.68774"
+       height="39.375248"
+       x="0.15612513"
+       y="178.09363" />
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke:url(#radialGradient4617-9);stroke-width:0.31225026;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4599-2"
+       width="507.68774"
+       height="39.375248"
+       x="0.15612513"
+       y="138.40613" />
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke:url(#radialGradient4617-5);stroke-width:0.31225026;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4599-6"
+       width="507.68774"
+       height="39.375248"
+       x="0.15612513"
+       y="98.718636" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3684"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:25px;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.36192638,0,0,0.95430246,0.96016467,31.234762)"><flowRegion
+         id="flowRegion3686"><rect
+           id="rect3688"
+           width="788.57141"
+           height="520"
+           x="5600"
+           y="1190.9562" /></flowRegion><flowPara
+         id="flowPara3690"></flowPara></flowRoot>    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:29.85498428px;line-height:13.994524px;font-family:'Arial Rounded MT Bold';-inkscape-font-specification:'Arial Rounded MT Bold, ';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.1554947"
+       x="42.876282"
+       y="-367.77658"
+       id="text3698"
+       transform="scale(0.61583889,1.6238013)"><tspan
+         sodipodi:role="line"
+         id="tspan3696"
+         x="42.876282"
+         y="-352.53461"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:29.85498428px;font-family:'Arial Rounded MT Bold';-inkscape-font-specification:'Arial Rounded MT Bold, ';stroke-width:0.1554947"></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20.54763985px;line-height:9.63170719px;font-family:'Arial Rounded MT Bold';-inkscape-font-specification:'Arial Rounded MT Bold, ';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#0055e4;fill-opacity:1;stroke:none;stroke-width:0.10701896;"
+       x="347.96548"
+       y="91.574997"
+       id="text3702"
+       transform="scale(0.72844522,1.3727868)"><tspan
+         sodipodi:role="line"
+         id="tspan3700"
+         x="347.96548"
+         y="91.574997"
+         style="text-align:center;text-anchor:middle;stroke-width:0.10701896;fill:#0055e4;fill-opacity:1;">Critical Link MitySOM-5CSX imaging development kit</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20.54763985px;line-height:9.63170719px;font-family:'Arial Rounded MT Bold';-inkscape-font-specification:'Arial Rounded MT Bold, ';letter-spacing:0px;word-spacing:0px;fill:#0055e4;fill-opacity:1;stroke:none;stroke-width:0.10701896;"
+       x="17.755934"
+       y="120.48516"
+       id="text3706"
+       transform="scale(0.72844523,1.3727868)"><tspan
+         sodipodi:role="line"
+         id="tspan3704"
+         x="17.755934"
+         y="120.48516"
+         style="stroke-width:0.10701896;fill:#0055e4;fill-opacity:1;">Rapid prototype your system using Altera's VIP Suite and OpenCL</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20.54763985px;line-height:9.63170719px;font-family:'Arial Rounded MT Bold';-inkscape-font-specification:'Arial Rounded MT Bold, ';letter-spacing:0px;word-spacing:0px;fill:#0055e4;fill-opacity:1;stroke:none;stroke-width:0.10701896;"
+       x="31.353218"
+       y="149.39534"
+       id="text3706-3"
+       transform="scale(0.72844522,1.3727868)"><tspan
+         sodipodi:role="line"
+         id="tspan3704-4"
+         x="31.353218"
+         y="149.39534"
+         style="stroke-width:0.10701896;fill:#0055e4;fill-opacity:1;">Choose from a variety of sensors and communication interfaces</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20.54763985px;line-height:9.63170719px;font-family:'Arial Rounded MT Bold';-inkscape-font-specification:'Arial Rounded MT Bold, ';letter-spacing:0px;word-spacing:0px;fill:#0055e4;fill-opacity:1;stroke:none;stroke-width:0.10701896;"
+       x="7.69033"
+       y="178.3055"
+       id="text3728"
+       transform="scale(0.72844522,1.3727868)"><tspan
+         sodipodi:role="line"
+         id="tspan3726"
+         x="7.69033"
+         y="178.3055"
+         style="stroke-width:0.10701896;fill:#0055e4;fill-opacity:1;">Leverage FPGA fabric and dual core ARMs for embedded processing</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20.54763985px;line-height:9.63170719px;font-family:'Arial Rounded MT Bold';-inkscape-font-specification:'Arial Rounded MT Bold, ';letter-spacing:0px;word-spacing:0px;fill:#0055e4;fill-opacity:1;stroke:none;stroke-width:0.10701896;"
+       x="65.064217"
+       y="207.21567"
+       id="text3728-8"
+       transform="scale(0.72844522,1.3727868)"><tspan
+         sodipodi:role="line"
+         id="tspan3726-9"
+         x="65.064217"
+         y="207.21567"
+         style="stroke-width:0.10701896;fill:#0055e4;fill-opacity:1;">Provides easy path to a flexible production ready solution</tspan></text>
+  </g>
+</svg>

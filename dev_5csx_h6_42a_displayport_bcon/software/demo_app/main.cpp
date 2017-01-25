@@ -9,6 +9,11 @@
 #include "GenICamModel.h"
 #include "VIPMixerII.h"
 #include "Filter2D.h"
+#include "FrameBufferII.h"
+
+#include <termios.h>
+#include <unistd.h>
+#include <fcntl.h>
 
 // Namespace for using pylon objects.
 using namespace Pylon;
@@ -24,6 +29,7 @@ static const unsigned int VIPMixerRegsAddr = 0xFF201000;
 static const unsigned int BCONInputRegsAddr = 0xFF202000;
 static const unsigned int PLLRegsAddr = 0xFF203000;
 static const unsigned int Filter2DRegsAddr = 0xFF204000;
+static const unsigned int FrameBufferRegsAddr = 0xFF205000;
 static const char* PLL_FileName = "pll_reconfig_table.txt";
 
 void DumpFrame(int w, int h)
@@ -56,6 +62,109 @@ void DumpFrame(int w, int h)
 	}
 }
 
+#define TEXT_FILE_LINES		5
+#define TEXT_LINE_HEIGHT	150
+#define TEXT_FILE_WIDTH		1920
+#define TEXT_FILE_HEIGHT	(TEXT_LINE_HEIGHT*TEXT_FILE_LINES)
+
+void ShowText(tcFrameBufferII* apBuffer, uint8_t* mem, int offset)
+{
+	uint8_t* buf = apBuffer->NextBuffer();
+	int blocksize = TEXT_LINE_HEIGHT*TEXT_FILE_WIDTH*3;
+	memcpy(buf, &mem[offset*blocksize], blocksize);
+	apBuffer->SwapBuffers();
+}
+
+void SlideImages(tcVIPMixerII* apMixer)
+{
+	static bool blend = false;
+	blend = !blend;
+	if (blend)
+	{
+		apMixer->EnableChannel(0, true, tcVIPMixerII::eeNone);
+		apMixer->EnableChannel(1, true, tcVIPMixerII::eeStatic);
+		for (int i = 0; i <= 480; i += 1)
+		{
+			usleep(1000);
+			apMixer->SetChannelOffset(0, i, 100);
+			apMixer->SetChannelOffset(1, 960-i, 100);
+		}
+	}
+	else
+	{
+		for (int i = 480; i >= 0; i -= 1)
+		{
+			usleep(1000);
+			apMixer->SetChannelOffset(0, i, 100);
+			apMixer->SetChannelOffset(1, 960-i, 100);
+		}
+		apMixer->EnableChannel(0, true, tcVIPMixerII::eeNone);
+		apMixer->EnableChannel(1, true, tcVIPMixerII::eeNone);
+	}
+}
+
+int kbhit(void)
+{
+	struct termios oldt, newt;
+	int ch;
+	int oldf;
+
+	tcgetattr(STDIN_FILENO, &oldt);
+	newt = oldt;
+	newt.c_lflag &= ~(ICANON | ECHO);
+	tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+	oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
+	fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
+
+	ch = getchar();
+
+	tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+	fcntl(STDIN_FILENO, F_SETFL, oldf);
+
+	if(ch != EOF)
+	{
+		ungetc(ch, stdin);
+		return 1;
+	}
+
+	return 0;
+}
+
+void DemoLoop(uint8_t* TextMem, tcFrameBufferII* apFB, tcVIPMixerII* apMixer)
+{
+	int state = 0;
+
+	while(!kbhit())
+	{
+		int delay = 5000*1000;
+		ShowText(apFB, TextMem, state);
+		switch(state)
+		{
+		case 0:
+			state = 1;
+			break;
+		case 1:
+			SlideImages(apMixer);
+			delay -= 1000*480;
+			state = 2;
+			break;
+		case 2:
+			SlideImages(apMixer);
+			delay -= 1000*480;
+			state = 3;
+			break;
+		case 3:
+			state = 4;
+			break;
+		case 4:
+		default:
+			state = 0;
+			break;
+		}
+		usleep(delay);
+	}
+}
+
 int main(int argc, char* argv[])
 {
 
@@ -63,17 +172,49 @@ int main(int argc, char* argv[])
 					  50000000,
 					  new tcPllReconfig(PLLRegsAddr,3),
 					  PLL_FileName);
+    lpBCONInput->reset(true);
+    usleep(200000);
     lpBCONInput->reset(false);
+    usleep(200000);
+    lpBCONInput->resetPLL(true);
+    usleep(200000);
     lpBCONInput->resetPLL(false);
 
     tcVIPMixerII* lpVIPMixerII = new tcVIPMixerII(VIPMixerRegsAddr, 3);
+    lpVIPMixerII->EnableMixer(false);
 
     tcFilter2D* lpFilter2D = new tcFilter2D(Filter2DRegsAddr, 5, true, true, 1, 5);
+    lpFilter2D->Enable(false);
+
+    tcFrameBufferII* lpFrameBufferII = new tcFrameBufferII(FrameBufferRegsAddr, 0x24000000, 1920*1080*3);
+    lpFrameBufferII->Enable(false);
+
+    uint8_t* lpTextBlock = new uint8_t[TEXT_FILE_WIDTH*TEXT_FILE_HEIGHT*3];
+    FILE* fid = fopen("/home/root/bcon_adapter/bin/DemoText.raw","rb");
+    if (fid)
+    {
+	    fread(lpTextBlock, 1, TEXT_FILE_WIDTH*TEXT_FILE_HEIGHT*3, fid);
+	    fclose(fid);
+	    uint8_t *red, *blue;
+	    red = &lpTextBlock[0];
+	    blue = &lpTextBlock[2];
+	    for (int i = 0; i < TEXT_FILE_WIDTH*TEXT_FILE_HEIGHT; i++)
+	    {
+	    	uint8_t tmp = *red;
+		*red = *blue;
+		*blue = tmp;
+		red += 3;
+		blue += 3;
+	    }
+    }
+    else
+    {
+    	cerr << "Could not open Text Data File" << endl;
+    }
 
     //int coes[6] = {0, 0, 0, 0, 0, 2};
-    int coes[6] = {-2, -2, -2, -2, -2, 48};
+    int coes[6] = {-2, -2, -2, -2, -2, 48}; // Edge Detection
     lpFilter2D->SetCoefs(coes);
-    lpFilter2D->Enable(true);
 
     // The exit code of the sample application.
     int exitCode = 0;
@@ -141,17 +282,31 @@ int main(int argc, char* argv[])
 
 	model.SetParam("BslColorSpaceMode", "RGB");
 	model.SetParam("LightSourcePreset", "Off");
-	model.SetParam("AutoTargetBrightness", "0.6");
+	model.SetParam("AutoTargetBrightness", "0.3");
+	model.SetParam("AcquisitionFrameRate", "50");
+
+	int line = 0;
+	lpFrameBufferII->SetFrameSize(TEXT_FILE_WIDTH, TEXT_LINE_HEIGHT);
+	lpFrameBufferII->Enable(true);
+	ShowText(lpFrameBufferII, lpTextBlock, line);
+	lpFrameBufferII->SwapBuffers();
 
 	lpVIPMixerII->EnableMixer(true);
 	lpVIPMixerII->SetChannelOffset(0, 0, 100);
 	lpVIPMixerII->SetChannelOffset(1, 960, 100);
+	lpVIPMixerII->SetChannelOffset(2, 0, 910);
 	lpVIPMixerII->SetChannelLayer(0, 0);
 	lpVIPMixerII->SetChannelLayer(1, 1);
+	lpVIPMixerII->SetChannelLayer(2, 2);
 	lpVIPMixerII->EnableChannel(0, true);
 	lpVIPMixerII->EnableChannel(1, true);
+	lpVIPMixerII->EnableChannel(2, true);
 	lpVIPMixerII->SetChannelAlpha(0, 0xFF);
 	lpVIPMixerII->SetChannelAlpha(1, 0x80);
+	lpVIPMixerII->SetChannelAlpha(2, 0xFF);
+
+	lpFilter2D->Enable(true);
+
 
 	bool blend = false;
 
@@ -161,6 +316,7 @@ int main(int argc, char* argv[])
 	cout << "hit q to quit:" << endl;
 	char c;
 	bool done = false;
+	DemoLoop(lpTextBlock, lpFrameBufferII, lpVIPMixerII);
 	cin >> c;
         while ( !done )
         {
@@ -184,6 +340,9 @@ int main(int argc, char* argv[])
 	    case 'q':
 	    	done = true;
 	        break;
+	    case 'e':
+	    	DemoLoop(lpTextBlock, lpFrameBufferII, lpVIPMixerII);
+	    	break;
 	    case 'c':
 	    {
 		const CCommandPtr stop = control.GetNode("AcquisitionStop");
@@ -244,6 +403,10 @@ int main(int argc, char* argv[])
         << e.GetDescription() << endl;
         exitCode = 1;
     }
+
+    delete lpTextBlock;
+
+    delete lpVIPMixerII;
 
     // Releases all pylon resources. 
     PylonTerminate();  
