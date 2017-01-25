@@ -14,6 +14,7 @@
 #include <termios.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <linux/input.h>
 
 // Namespace for using pylon objects.
 using namespace Pylon;
@@ -130,39 +131,90 @@ int kbhit(void)
 	return 0;
 }
 
-void DemoLoop(uint8_t* TextMem, tcFrameBufferII* apFB, tcVIPMixerII* apMixer)
+int check_buttons(void)
+{
+	static int fd = -1;
+	int rv = 0;
+	if (fd < 0)
+	{
+		fd = open("/dev/input/event0", O_RDONLY);
+		int f = fcntl(fd, F_GETFL, 0);
+		fcntl(fd, F_SETFL, f | O_NONBLOCK);
+		if (fd < 0)
+		{
+			cerr << "Can't Open Event File\n" << endl;
+		}
+	}
+	if (fd >= 0)
+	{
+		struct input_event ev;
+		if (read(fd, &ev, sizeof(ev)) == sizeof(ev))
+			rv = ev.code;
+	}
+	return rv;
+}
+
+void DemoLoop(uint8_t* TextMem, tcFrameBufferII* apFB, tcVIPMixerII* apMixer, tcGenICamModel *apModel)
 {
 	int state = 0;
+	int delta = 1000;
+	int delay = 0;
+	static float Brightness = 0.3;
 
+	ShowText(apFB, TextMem, state);
 	while(!kbhit())
 	{
-		int delay = 5000*1000;
-		ShowText(apFB, TextMem, state);
-		switch(state)
+		if (delay == 0)
 		{
-		case 0:
-			state = 1;
-			break;
-		case 1:
-			SlideImages(apMixer);
-			delay -= 1000*480;
-			state = 2;
-			break;
-		case 2:
-			SlideImages(apMixer);
-			delay -= 1000*480;
-			state = 3;
-			break;
-		case 3:
-			state = 4;
-			break;
-		case 4:
-		default:
-			state = 0;
-			break;
+			delay = 5000*delta;
+			ShowText(apFB, TextMem, state);
+			switch(state)
+			{
+			case 0:
+				state = 1;
+				break;
+			case 1:
+				SlideImages(apMixer);
+				delay -= 480*delta;
+				state = 2;
+				break;
+			case 2:
+				SlideImages(apMixer);
+				delay -= 480*delta;
+				state = 3;
+				break;
+			case 3:
+				state = 4;
+				break;
+			case 4:
+			default:
+				state = 0;
+				break;
+			}
 		}
-		usleep(delay);
+		usleep(delta);
+		delay -= delta;
+		int btn = check_buttons();
+		if (btn == BTN_1)
+		{
+			Brightness += 0.05;
+			if (Brightness > 1.0)
+				Brightness = 1.0;
+			char buffer[32];
+			sprintf(buffer, "%f", Brightness);
+			apModel->SetParam("AutoTargetBrightness", buffer);
+		}
+		else if (btn == BTN_2)
+		{
+			Brightness -= 0.05;
+			if (Brightness < 0.3)
+				Brightness = 0.3;
+			char buffer[32];
+			sprintf(buffer, "%f", Brightness);
+			apModel->SetParam("AutoTargetBrightness", buffer);
+		}
 	}
+	cout << "exiting demo" << endl;
 }
 
 int main(int argc, char* argv[])
@@ -316,7 +368,7 @@ int main(int argc, char* argv[])
 	cout << "hit q to quit:" << endl;
 	char c;
 	bool done = false;
-	DemoLoop(lpTextBlock, lpFrameBufferII, lpVIPMixerII);
+	DemoLoop(lpTextBlock, lpFrameBufferII, lpVIPMixerII, &model);
 	cin >> c;
         while ( !done )
         {
@@ -341,7 +393,7 @@ int main(int argc, char* argv[])
 	    	done = true;
 	        break;
 	    case 'e':
-	    	DemoLoop(lpTextBlock, lpFrameBufferII, lpVIPMixerII);
+	    	DemoLoop(lpTextBlock, lpFrameBufferII, lpVIPMixerII, &model);
 	    	break;
 	    case 'c':
 	    {
