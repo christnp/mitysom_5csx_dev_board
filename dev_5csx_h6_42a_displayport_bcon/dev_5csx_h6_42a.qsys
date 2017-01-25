@@ -49,6 +49,14 @@
          type = "int";
       }
    }
+   element alt_vip_cl_vfb_2
+   {
+      datum _sortIndex
+      {
+         value = "14";
+         type = "int";
+      }
+   }
    element alt_vip_cpr_0
    {
       datum _sortIndex
@@ -84,16 +92,8 @@
       }
       datum megawizard_uipreferences
       {
-         value = "{}";
+         value = "{output_directory=/home/mikew/projects/mitysom_5csx_dev_board/dev_5csx_h6_42a_displayport_bcon, output_language=VERILOG}";
          type = "String";
-      }
-   }
-   element alt_vip_vfr_0
-   {
-      datum _sortIndex
-      {
-         value = "14";
-         type = "int";
       }
    }
    element bcon_input_0
@@ -463,6 +463,48 @@
   <parameter name="WRITE_BURST_TARGET" value="32" />
   <parameter name="WRITE_FIFO_DEPTH" value="64" />
  </module>
+ <module
+   name="alt_vip_cl_vfb_2"
+   kind="alt_vip_cl_vfb"
+   version="16.0"
+   enabled="1">
+  <parameter name="AUTO_DEVICE" value="5CSXFC6C6U23C7" />
+  <parameter name="AUTO_DEVICE_SPEEDGRADE" value="7_H6" />
+  <parameter name="BITS_PER_SYMBOL" value="8" />
+  <parameter name="BURST_ALIGNMENT" value="1" />
+  <parameter name="CLOCKS_ARE_SEPARATE" value="1" />
+  <parameter name="COLOR_PLANES_ARE_IN_PARALLEL" value="1" />
+  <parameter name="CONTROLLED_DROP_REPEAT" value="0" />
+  <parameter name="DROP_FRAMES" value="0" />
+  <parameter name="DROP_INVALID_FIELDS" value="0" />
+  <parameter name="DROP_REPEAT_USER" value="0" />
+  <parameter name="FAMILY" value="Cyclone V" />
+  <parameter name="INTERLACED_SUPPORT" value="0" />
+  <parameter name="IS_FRAME_READER" value="1" />
+  <parameter name="IS_FRAME_WRITER" value="0" />
+  <parameter name="IS_SYNC_MASTER" value="0" />
+  <parameter name="IS_SYNC_SLAVE" value="0" />
+  <parameter name="MAX_HEIGHT" value="1080" />
+  <parameter name="MAX_SYMBOLS_PER_PACKET" value="10" />
+  <parameter name="MAX_WIDTH" value="1920" />
+  <parameter name="MEM_BASE_ADDR" value="603979776" />
+  <parameter name="MEM_BUFFER_OFFSET" value="16777216" />
+  <parameter name="MEM_PORT_WIDTH" value="128" />
+  <parameter name="MULTI_FRAME_DELAY" value="1" />
+  <parameter name="NUMBER_OF_COLOR_PLANES" value="3" />
+  <parameter name="PIXELS_IN_PARALLEL" value="1" />
+  <parameter name="READER_RUNTIME_CONTROL" value="1" />
+  <parameter name="READY_LATENCY" value="1" />
+  <parameter name="READ_BURST_TARGET" value="32" />
+  <parameter name="READ_FIFO_DEPTH" value="64" />
+  <parameter name="REPEAT_FRAMES" value="1" />
+  <parameter name="TEST_INIT" value="0" />
+  <parameter name="USER_PACKETS_MAX_STORAGE" value="0" />
+  <parameter name="USE_BUFFER_OFFSET" value="0" />
+  <parameter name="WRITER_RUNTIME_CONTROL" value="0" />
+  <parameter name="WRITE_BURST_TARGET" value="32" />
+  <parameter name="WRITE_FIFO_DEPTH" value="64" />
+ </module>
  <module name="alt_vip_cpr_0" kind="alt_vip_cpr" version="13.1" enabled="1">
   <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone V" />
   <parameter name="DIN0_SYMBOLS_PER_BEAT" value="3" />
@@ -486,20 +528,6 @@
  <module name="alt_vip_fir_0" kind="alt_vip_fir" version="13.1" enabled="1">
   <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone V" />
   <parameter name="PARAMETERISATION"><![CDATA[<firParams><FIR_NAME>finite_impulse_response</FIR_NAME><FIR_WIDTH>960</FIR_WIDTH><FIR_CHANNELS_IN_SEQ>3</FIR_CHANNELS_IN_SEQ><FIR_INPUT_OUTPUT_DATATYPES><IODT_INPUT_BPS>8</IODT_INPUT_BPS><IODT_OUTPUT_BPS>8</IODT_OUTPUT_BPS><IODT_INPUT_DATA_TYPE>DATA_TYPE_UNSIGNED</IODT_INPUT_DATA_TYPE><IODT_OUTPUT_DATA_TYPE>DATA_TYPE_UNSIGNED</IODT_OUTPUT_DATA_TYPE><IODT_USE_INPUT_GUARD_BANDS>false</IODT_USE_INPUT_GUARD_BANDS><IODT_INPUT_GUARD_MIN>0</IODT_INPUT_GUARD_MIN><IODT_INPUT_GUARD_MAX>255</IODT_INPUT_GUARD_MAX><IODT_USE_OUTPUT_GUARD_BANDS>true</IODT_USE_OUTPUT_GUARD_BANDS><IODT_OUTPUT_GUARD_MIN>0</IODT_OUTPUT_GUARD_MIN><IODT_OUTPUT_GUARD_MAX>255</IODT_OUTPUT_GUARD_MAX></FIR_INPUT_OUTPUT_DATATYPES><FIR_FILTER_SIZE>5</FIR_FILTER_SIZE><FIR_SYMMETRIC_MODE>true</FIR_SYMMETRIC_MODE><FIR_COEFFS_MODEL>SIMPLE_SMOOTHING</FIR_COEFFS_MODEL><FIR_COEFFS><kRow> <k>-0.25</k><k>-0.25</k><k>-0.25</k> </kRow><kRow> <k>-0.25</k><k>2.0</k><k>-0.25</k> </kRow><kRow> <k>-0.25</k><k>-0.25</k><k>-0.25</k> </kRow></FIR_COEFFS><FIR_COEFFS_PRECISION><CPC_INTEGER_BITS>5</CPC_INTEGER_BITS><CPC_FRACTION_BITS>1</CPC_FRACTION_BITS><CPC_COEFFS_SIGNED>true</CPC_COEFFS_SIGNED></FIR_COEFFS_PRECISION><FIR_OUTPUT_CONVERSION><ODTC_SCALE>0</ODTC_SCALE><ODTC_FIXEDPOINT_TO_INTEGER>FRACTION_BITS_ROUND_HALF_UP</ODTC_FIXEDPOINT_TO_INTEGER><ODTC_CONVERT_SIGNED_TO_UNSIGNED>CONVERT_TO_UNSIGNED_SATURATE</ODTC_CONVERT_SIGNED_TO_UNSIGNED></FIR_OUTPUT_CONVERSION><FIR_CONTROL_PORT>true</FIR_CONTROL_PORT></firParams>]]></parameter>
- </module>
- <module name="alt_vip_vfr_0" kind="alt_vip_vfr" version="14.0" enabled="1">
-  <parameter name="AUTO_CLOCK_MASTER_CLOCK_RATE" value="154000000" />
-  <parameter name="AUTO_CLOCK_RESET_CLOCK_RATE" value="154000000" />
-  <parameter name="BITS_PER_PIXEL_PER_COLOR_PLANE" value="8" />
-  <parameter name="CLOCKS_ARE_SEPARATE" value="1" />
-  <parameter name="FAMILY" value="Cyclone V" />
-  <parameter name="MAX_IMAGE_HEIGHT" value="1080" />
-  <parameter name="MAX_IMAGE_WIDTH" value="1920" />
-  <parameter name="MEM_PORT_WIDTH" value="128" />
-  <parameter name="NUMBER_OF_CHANNELS_IN_PARALLEL" value="3" />
-  <parameter name="NUMBER_OF_CHANNELS_IN_SEQUENCE" value="1" />
-  <parameter name="RMASTER_BURST_TARGET" value="32" />
-  <parameter name="RMASTER_FIFO_DEPTH" value="64" />
  </module>
  <module name="bcon_input_0" kind="bcon_input" version="1.1" enabled="1">
   <parameter name="g_lane_invert" value="30" />
@@ -1077,24 +1105,6 @@
  <connection
    kind="avalon"
    version="16.0"
-   start="alt_vip_vfr_0.avalon_master"
-   end="hps_0.f2h_sdram1_data">
-  <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x0000" />
-  <parameter name="defaultConnection" value="false" />
- </connection>
- <connection
-   kind="avalon"
-   version="16.0"
-   start="hps_0.h2f_lw_axi_master"
-   end="alt_vip_vfr_0.avalon_slave">
-  <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x5000" />
-  <parameter name="defaultConnection" value="false" />
- </connection>
- <connection
-   kind="avalon"
-   version="16.0"
    start="hps_0.h2f_lw_axi_master"
    end="alt_vip_cl_mixer_0.control">
   <parameter name="arbitrationPriority" value="1" />
@@ -1108,6 +1118,15 @@
    end="alt_vip_fir_0.control">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x4000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="16.0"
+   start="hps_0.h2f_lw_axi_master"
+   end="alt_vip_cl_vfb_2.control">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x5000" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -1158,6 +1177,15 @@
  <connection
    kind="avalon"
    version="16.0"
+   start="alt_vip_cl_vfb_2.mem_master_rd"
+   end="hps_0.f2h_sdram1_data">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="16.0"
    start="alt_vip_cl_vfb_0.mem_master_wr"
    end="hps_0.f2h_sdram0_data">
   <parameter name="arbitrationPriority" value="1" />
@@ -1176,11 +1204,6 @@
  <connection
    kind="avalon_streaming"
    version="16.0"
-   start="alt_vip_vfr_0.avalon_streaming_source"
-   end="alt_vip_cl_mixer_0.din2" />
- <connection
-   kind="avalon_streaming"
-   version="16.0"
    start="alt_vip_cl_vfb_0.dout"
    end="alt_vip_cl_mixer_0.din0" />
  <connection
@@ -1193,6 +1216,11 @@
    version="16.0"
    start="alt_vip_cl_vfb_1.dout"
    end="alt_vip_cl_mixer_0.din1" />
+ <connection
+   kind="avalon_streaming"
+   version="16.0"
+   start="alt_vip_cl_vfb_2.dout"
+   end="alt_vip_cl_mixer_0.din2" />
  <connection
    kind="avalon_streaming"
    version="16.0"
@@ -1253,16 +1281,6 @@
    kind="clock"
    version="16.0"
    start="dp_0.video_clk_out"
-   end="alt_vip_vfr_0.clock_master" />
- <connection
-   kind="clock"
-   version="16.0"
-   start="dp_0.video_clk_out"
-   end="alt_vip_vfr_0.clock_reset" />
- <connection
-   kind="clock"
-   version="16.0"
-   start="dp_0.video_clk_out"
    end="hps_0.f2h_sdram0_clock" />
  <connection
    kind="clock"
@@ -1298,12 +1316,22 @@
    kind="clock"
    version="16.0"
    start="dp_0.video_clk_out"
+   end="alt_vip_cl_vfb_2.main_clock" />
+ <connection
+   kind="clock"
+   version="16.0"
+   start="dp_0.video_clk_out"
    end="alt_vip_cl_vfb_0.mem_clock" />
  <connection
    kind="clock"
    version="16.0"
    start="dp_0.video_clk_out"
    end="alt_vip_cl_vfb_1.mem_clock" />
+ <connection
+   kind="clock"
+   version="16.0"
+   start="dp_0.video_clk_out"
+   end="alt_vip_cl_vfb_2.mem_clock" />
  <connection
    kind="clock"
    version="16.0"
@@ -1335,19 +1363,9 @@
    kind="interrupt"
    version="16.0"
    start="hps_0.f2h_irq0"
-   end="alt_vip_vfr_0.interrupt_sender">
+   end="alt_vip_cl_vfb_2.control_interrupt">
   <parameter name="irqNumber" value="0" />
  </connection>
- <connection
-   kind="reset"
-   version="16.0"
-   start="hps_0.h2f_reset"
-   end="alt_vip_vfr_0.clock_master_reset" />
- <connection
-   kind="reset"
-   version="16.0"
-   start="hps_0.h2f_reset"
-   end="alt_vip_vfr_0.clock_reset_reset" />
  <connection
    kind="reset"
    version="16.0"
@@ -1377,12 +1395,22 @@
    kind="reset"
    version="16.0"
    start="hps_0.h2f_reset"
+   end="alt_vip_cl_vfb_2.main_reset" />
+ <connection
+   kind="reset"
+   version="16.0"
+   start="hps_0.h2f_reset"
    end="alt_vip_cl_vfb_0.mem_reset" />
  <connection
    kind="reset"
    version="16.0"
    start="hps_0.h2f_reset"
    end="alt_vip_cl_vfb_1.mem_reset" />
+ <connection
+   kind="reset"
+   version="16.0"
+   start="hps_0.h2f_reset"
+   end="alt_vip_cl_vfb_2.mem_reset" />
  <connection
    kind="reset"
    version="16.0"
