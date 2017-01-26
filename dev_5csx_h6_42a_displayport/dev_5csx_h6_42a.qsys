@@ -9,15 +9,20 @@
    categories="System" />
  <parameter name="bonusData"><![CDATA[bonusData 
 {
-   element alt_vip_cl_mixer_0
+   element alt_vip_cpr_0
    {
       datum _sortIndex
       {
          value = "5";
          type = "int";
       }
+      datum megawizard_uipreferences
+      {
+         value = "{}";
+         type = "String";
+      }
    }
-   element alt_vip_cl_tpg_0
+   element alt_vip_vfr_0
    {
       datum _sortIndex
       {
@@ -73,6 +78,14 @@
       {
          value = "65536";
          type = "String";
+      }
+   }
+   element video_clk
+   {
+      datum _sortIndex
+      {
+         value = "6";
+         type = "int";
       }
    }
 }
@@ -144,59 +157,41 @@
    dir="end" />
  <interface name="hps_ddr" internal="hps_0.memory" type="conduit" dir="end" />
  <interface name="hps_io" internal="hps_0.hps_io" type="conduit" dir="end" />
- <interface name="i2c2" internal="hps_0.i2c2" />
- <interface name="i2c2_clk" internal="hps_0.i2c2_clk" />
- <interface name="i2c2_scl_in" internal="hps_0.i2c2_scl_in" />
- <module
-   name="alt_vip_cl_mixer_0"
-   kind="alt_vip_cl_mixer"
-   version="16.0"
-   enabled="1">
-  <parameter name="ALPHA_ENABLE" value="0" />
-  <parameter name="ALPHA_STREAMS_ENABLE" value="0" />
-  <parameter name="AUTO_DEVICE" value="5CSXFC6C6U23C7" />
-  <parameter name="AUTO_DEVICE_SPEEDGRADE" value="7_H6" />
-  <parameter name="BITS_PER_SYMBOL" value="8" />
-  <parameter name="COLOR_PLANES_ARE_IN_PARALLEL" value="1" />
-  <parameter name="COLOR_SPACE" value="RGB" />
-  <parameter name="FAMILY" value="Cyclone V" />
-  <parameter name="IS_422" value="1" />
-  <parameter name="LAYER_POSITION_ENABLE" value="0" />
-  <parameter name="MAX_HEIGHT" value="1080" />
-  <parameter name="MAX_WIDTH" value="1920" />
-  <parameter name="NO_OF_INPUTS" value="1" />
-  <parameter name="NUMBER_OF_COLOR_PLANES" value="2" />
-  <parameter name="PATTERN" value="uniform" />
-  <parameter name="PIPELINE_READY" value="0" />
-  <parameter name="PIXELS_IN_PARALLEL" value="1" />
-  <parameter name="UNIFORM_VALUE_BCR" value="0" />
-  <parameter name="UNIFORM_VALUE_GCB" value="0" />
-  <parameter name="UNIFORM_VALUE_RY" value="0" />
-  <parameter name="USER_PACKET_FIFO_DEPTH" value="0" />
-  <parameter name="USER_PACKET_SUPPORT" value="DISCARD" />
+ <interface name="i2c2" internal="hps_0.i2c2" type="conduit" dir="end" />
+ <interface name="i2c2_clk" internal="hps_0.i2c2_clk" type="clock" dir="start" />
+ <interface
+   name="i2c2_scl_in"
+   internal="hps_0.i2c2_scl_in"
+   type="clock"
+   dir="end" />
+ <interface
+   name="video_clk"
+   internal="video_clk.out_clk"
+   type="clock"
+   dir="start" />
+ <module name="alt_vip_cpr_0" kind="alt_vip_cpr" version="13.1" enabled="1">
+  <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone V" />
+  <parameter name="DIN0_SYMBOLS_PER_BEAT" value="4" />
+  <parameter name="DIN1_ENABLED" value="0" />
+  <parameter name="DIN1_SYMBOLS_PER_BEAT" value="0" />
+  <parameter name="DOUT0_SYMBOLS_PER_BEAT" value="3" />
+  <parameter name="DOUT1_ENABLED" value="0" />
+  <parameter name="DOUT1_SYMBOLS_PER_BEAT" value="0" />
+  <parameter name="PARAMETERISATION"><![CDATA[<colourPatternRearrangerParams><CPR_NAME>Color Plane Sequencer</CPR_NAME><CPR_BPS>8</CPR_BPS><CPR_PORTS><INPUT_PORT><NAME>din0</NAME><STREAMING_DESCRIPTOR>[a:b:c:unnamed]</STREAMING_DESCRIPTOR><ENABLED>true</ENABLED></INPUT_PORT><INPUT_PORT><NAME>din1</NAME><STREAMING_DESCRIPTOR>[Channel]</STREAMING_DESCRIPTOR><ENABLED>false</ENABLED></INPUT_PORT><OUTPUT_PORT><NAME>dout0</NAME><STREAMING_DESCRIPTOR>[a:b:c]</STREAMING_DESCRIPTOR><ENABLED>true</ENABLED><NON_IMAGE_PACKET_SOURCE>din0</NON_IMAGE_PACKET_SOURCE><HALVE_WIDTH>true</HALVE_WIDTH></OUTPUT_PORT><OUTPUT_PORT><NAME>dout1</NAME><STREAMING_DESCRIPTOR>[Channel]</STREAMING_DESCRIPTOR><ENABLED>false</ENABLED><NON_IMAGE_PACKET_SOURCE>din0</NON_IMAGE_PACKET_SOURCE><HALVE_WIDTH>false</HALVE_WIDTH></OUTPUT_PORT></CPR_PORTS><CPR_INPUT_2_PIXELS>false</CPR_INPUT_2_PIXELS></colourPatternRearrangerParams>]]></parameter>
  </module>
- <module
-   name="alt_vip_cl_tpg_0"
-   kind="alt_vip_cl_tpg"
-   version="16.0"
-   enabled="1">
-  <parameter name="AUTO_DEVICE" value="5CSXFC6C6U23C7" />
-  <parameter name="AUTO_DEVICE_SPEEDGRADE" value="7_H6" />
-  <parameter name="BITS_PER_SYMBOL" value="8" />
-  <parameter name="COLOR_PLANES_ARE_IN_PARALLEL" value="1" />
-  <parameter name="COLOR_SPACE" value="RGB" />
+ <module name="alt_vip_vfr_0" kind="alt_vip_vfr" version="14.0" enabled="1">
+  <parameter name="AUTO_CLOCK_MASTER_CLOCK_RATE" value="100000000" />
+  <parameter name="AUTO_CLOCK_RESET_CLOCK_RATE" value="139000000" />
+  <parameter name="BITS_PER_PIXEL_PER_COLOR_PLANE" value="8" />
+  <parameter name="CLOCKS_ARE_SEPARATE" value="1" />
   <parameter name="FAMILY" value="Cyclone V" />
-  <parameter name="INTERLACING" value="prog" />
-  <parameter name="MAX_HEIGHT" value="600" />
-  <parameter name="MAX_WIDTH" value="800" />
-  <parameter name="NUMBER_OF_COLOR_PLANES" value="2" />
-  <parameter name="OUTPUT_FORMAT" value="4.4.4" />
-  <parameter name="PATTERN" value="colorbars" />
-  <parameter name="PIXELS_IN_PARALLEL" value="1" />
-  <parameter name="RUNTIME_CONTROL" value="0" />
-  <parameter name="UNIFORM_VALUE_BCR" value="16" />
-  <parameter name="UNIFORM_VALUE_GCB" value="16" />
-  <parameter name="UNIFORM_VALUE_RY" value="16" />
+  <parameter name="MAX_IMAGE_HEIGHT" value="1080" />
+  <parameter name="MAX_IMAGE_WIDTH" value="1920" />
+  <parameter name="MEM_PORT_WIDTH" value="256" />
+  <parameter name="NUMBER_OF_CHANNELS_IN_PARALLEL" value="4" />
+  <parameter name="NUMBER_OF_CHANNELS_IN_SEQUENCE" value="1" />
+  <parameter name="RMASTER_BURST_TARGET" value="32" />
+  <parameter name="RMASTER_FIFO_DEPTH" value="1024" />
  </module>
  <module
    name="clk_100mhz"
@@ -317,7 +312,7 @@
   <parameter name="EXPORT_AFI_HALF_CLK" value="false" />
   <parameter name="EXTRA_SETTINGS" value="" />
   <parameter name="F2H_AXI_CLOCK_FREQ" value="100" />
-  <parameter name="F2H_SDRAM0_CLOCK_FREQ" value="100" />
+  <parameter name="F2H_SDRAM0_CLOCK_FREQ" value="100000000" />
   <parameter name="F2H_SDRAM1_CLOCK_FREQ" value="100" />
   <parameter name="F2H_SDRAM2_CLOCK_FREQ" value="100" />
   <parameter name="F2H_SDRAM3_CLOCK_FREQ" value="100" />
@@ -330,8 +325,8 @@
   <parameter name="F2SCLK_SDRAMCLK_Enable" value="false" />
   <parameter name="F2SCLK_SDRAMCLK_FREQ" value="0" />
   <parameter name="F2SCLK_WARMRST_Enable" value="false" />
-  <parameter name="F2SDRAM_Type" value="" />
-  <parameter name="F2SDRAM_Width" value="" />
+  <parameter name="F2SDRAM_Type" value="Avalon-MM Read-Only" />
+  <parameter name="F2SDRAM_Width" value="256" />
   <parameter name="F2SINTERRUPT_Enable" value="true" />
   <parameter name="F2S_Width" value="0" />
   <parameter name="FIX_READ_LATENCY" value="8" />
@@ -351,7 +346,7 @@
      value="100" />
   <parameter name="FPGA_PERIPHERAL_INPUT_CLOCK_FREQ_I2C0_SCL_IN" value="100" />
   <parameter name="FPGA_PERIPHERAL_INPUT_CLOCK_FREQ_I2C1_SCL_IN" value="100" />
-  <parameter name="FPGA_PERIPHERAL_INPUT_CLOCK_FREQ_I2C2_SCL_IN" value="100" />
+  <parameter name="FPGA_PERIPHERAL_INPUT_CLOCK_FREQ_I2C2_SCL_IN" value="0" />
   <parameter name="FPGA_PERIPHERAL_INPUT_CLOCK_FREQ_I2C3_SCL_IN" value="100" />
   <parameter name="FPGA_PERIPHERAL_INPUT_CLOCK_FREQ_SDIO_CLK_IN" value="100" />
   <parameter name="FPGA_PERIPHERAL_INPUT_CLOCK_FREQ_SPIS0_SCLK_IN" value="100" />
@@ -388,8 +383,8 @@
   <parameter name="I2C0_PinMuxing" value="HPS I/O Set 1" />
   <parameter name="I2C1_Mode" value="I2C" />
   <parameter name="I2C1_PinMuxing" value="HPS I/O Set 0" />
-  <parameter name="I2C2_Mode" value="N/A" />
-  <parameter name="I2C2_PinMuxing" value="Unused" />
+  <parameter name="I2C2_Mode" value="Full" />
+  <parameter name="I2C2_PinMuxing" value="FPGA" />
   <parameter name="I2C3_Mode" value="N/A" />
   <parameter name="I2C3_PinMuxing" value="Unused" />
   <parameter name="INCLUDE_BOARD_DELAY_MODEL" value="false" />
@@ -758,11 +753,29 @@
    enabled="1">
   <parameter name="id" value="1" />
  </module>
+ <module
+   name="video_clk"
+   kind="altera_clock_bridge"
+   version="16.0"
+   enabled="1">
+  <parameter name="DERIVED_CLOCK_RATE" value="139000000" />
+  <parameter name="EXPLICIT_CLOCK_RATE" value="0" />
+  <parameter name="NUM_CLOCK_OUTPUTS" value="1" />
+ </module>
+ <connection
+   kind="avalon"
+   version="16.0"
+   start="alt_vip_vfr_0.avalon_master"
+   end="hps_0.f2h_sdram0_data">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
  <connection
    kind="avalon"
    version="16.0"
    start="hps_0.h2f_lw_axi_master"
-   end="alt_vip_cl_mixer_0.control">
+   end="alt_vip_vfr_0.avalon_slave">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x1000" />
   <parameter name="defaultConnection" value="false" />
@@ -779,12 +792,12 @@
  <connection
    kind="avalon_streaming"
    version="16.0"
-   start="alt_vip_cl_tpg_0.dout"
-   end="alt_vip_cl_mixer_0.din0" />
+   start="alt_vip_vfr_0.avalon_streaming_source"
+   end="alt_vip_cpr_0.din0" />
  <connection
    kind="avalon_streaming"
    version="16.0"
-   start="alt_vip_cl_mixer_0.dout"
+   start="alt_vip_cpr_0.dout0"
    end="dp_0.video_in" />
  <connection
    kind="clock"
@@ -796,33 +809,60 @@
    kind="clock"
    version="16.0"
    start="clk_100mhz.out_clk"
+   end="alt_vip_vfr_0.clock_master" />
+ <connection
+   kind="clock"
+   version="16.0"
+   start="clk_100mhz.out_clk"
+   end="hps_0.f2h_sdram0_clock" />
+ <connection
+   kind="clock"
+   version="16.0"
+   start="clk_100mhz.out_clk"
    end="hps_0.h2f_lw_axi_clock" />
  <connection
    kind="clock"
    version="16.0"
    start="dp_0.video_clk_out"
-   end="alt_vip_cl_tpg_0.main_clock" />
+   end="alt_vip_cpr_0.clock" />
  <connection
    kind="clock"
    version="16.0"
    start="dp_0.video_clk_out"
-   end="alt_vip_cl_mixer_0.main_clock" />
+   end="alt_vip_vfr_0.clock_reset" />
+ <connection
+   kind="clock"
+   version="16.0"
+   start="dp_0.video_clk_out"
+   end="video_clk.in_clk" />
+ <connection
+   kind="interrupt"
+   version="16.0"
+   start="hps_0.f2h_irq0"
+   end="alt_vip_vfr_0.interrupt_sender">
+  <parameter name="irqNumber" value="0" />
+ </connection>
  <connection
    kind="reset"
    version="16.0"
    start="hps_0.h2f_reset"
-   end="alt_vip_cl_tpg_0.main_reset" />
+   end="alt_vip_vfr_0.clock_master_reset" />
  <connection
    kind="reset"
    version="16.0"
    start="hps_0.h2f_reset"
-   end="alt_vip_cl_mixer_0.main_reset" />
+   end="alt_vip_vfr_0.clock_reset_reset" />
  <connection
    kind="reset"
    version="16.0"
    start="hps_0.h2f_reset"
    end="sysid_qsys.reset" />
  <connection kind="reset" version="16.0" start="hps_0.h2f_reset" end="dp_0.reset" />
+ <connection
+   kind="reset"
+   version="16.0"
+   start="hps_0.h2f_reset"
+   end="alt_vip_cpr_0.reset" />
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
  <interconnectRequirement for="$system" name="qsys_mm.maxAdditionalLatency" value="4" />
 </system>

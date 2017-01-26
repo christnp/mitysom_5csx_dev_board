@@ -131,7 +131,11 @@ entity dev_5csx_h6_42a_top is
 		GXB_TX_1      : out std_logic;
 		GXB_TX_2      : out std_logic;
 		GXB_TX_3      : out std_logic;
-		GXB_REFCLK0   : in  std_logic
+		GXB_REFCLK0   : in  std_logic;
+
+		-- Level translator IC
+		B4A_RX_B74_P : inout std_logic; -- SCL
+		B4A_RX_B74_N : inout std_logic -- SDA
 	);
 
 end entity dev_5csx_h6_42a_top;
@@ -202,6 +206,10 @@ architecture rtl of dev_5csx_h6_42a_top is
 			hps_io_hps_io_i2c0_inst_SCL       : inout std_logic                     := 'X'; -- hps_io_i2c0_inst_SCL
 			hps_io_hps_io_i2c1_inst_SDA       : inout std_logic                     := 'X'; -- hps_io_i2c1_inst_SDA
 			hps_io_hps_io_i2c1_inst_SCL       : inout std_logic                     := 'X'; -- hps_io_i2c1_inst_SCL
+			i2c2_out_data                           : out   std_logic;                                        -- out_data
+			i2c2_sda                                : in    std_logic                     := 'X';             -- sda
+			i2c2_clk_clk                            : out   std_logic;                                        -- clk
+			i2c2_scl_in_clk                         : in    std_logic                     := 'X';             -- clk
 			hps_io_hps_io_can0_inst_RX        : in    std_logic                     := 'X'; -- hps_io_can0_inst_RX
 			hps_io_hps_io_can0_inst_TX        : out   std_logic; -- hps_io_can0_inst_TX
 			hps_io_hps_io_can1_inst_RX        : in    std_logic                     := 'X'; -- hps_io_can1_inst_RX
@@ -252,6 +260,8 @@ architecture rtl of dev_5csx_h6_42a_top is
             dp_0_dp_tx_aux_aux_out                  : out   std_logic;                                        -- aux_out
             dp_0_dp_tx_aux_aux_oe                   : out   std_logic;                                        -- aux_oe
             dp_0_dp_tx_aux_hpd                      : in    std_logic                     := 'X';             -- hpd
+			video_clk_clk                           : out   std_logic;
+			dp_0_cvo_clocked_video_vid_clk          : in    std_logic;
             dp_0_cvo_clocked_video_vid_data         : out   std_logic_vector(23 downto 0);                    -- vid_data
             dp_0_cvo_clocked_video_underflow        : out   std_logic;                                        -- underflow
             dp_0_cvo_clocked_video_vid_datavalid    : out   std_logic;                                        -- vid_datavalid
@@ -285,7 +295,14 @@ architecture rtl of dev_5csx_h6_42a_top is
 
 	signal dp_0_oc_i2c_scl_pad_io                  :  std_logic                     := 'X';             -- scl_pad_io
 	signal dp_0_oc_i2c_sda_pad_io                  :  std_logic                     := 'X';             -- sda_pad_io
+	signal video_clk                           :   std_logic;
 
+	signal i2c2_out_data                           :    std_logic;
+	signal i2c2_sda                                :    std_logic;
+	signal i2c2_clk                            :  std_logic;      
+	signal i2c2_scl_in_clk                         :     std_logic;
+	signal hps_scl_debounce : std_logic_vector(3 downto 0) := (others=>'1'); 
+	signal hps_sda_debounce : std_logic_vector(4 downto 0) := (others=>'1');
 				
 
 begin                                   -- architecture rtl
@@ -357,6 +374,10 @@ begin                                   -- architecture rtl
 			hps_io_hps_io_i2c0_inst_SCL       => B7A_I2C0_SCL, --       .hps_io_i2c0_inst_SCL
 			hps_io_hps_io_i2c1_inst_SDA       => I2C1_SDA, -- hps_io_i2c1_inst_SDA
 			hps_io_hps_io_i2c1_inst_SCL       => I2C1_SCL, -- hps_io_i2c1_inst_SCL
+			i2c2_out_data 					  => i2c2_out_data,
+			i2c2_sda                      	  => i2c2_sda,
+			i2c2_clk_clk                  	  => i2c2_clk,
+			i2c2_scl_in_clk                	  => i2c2_scl_in_clk,
 			hps_io_hps_io_can0_inst_RX        => B7A_CAN0_RX, --       .hps_io_can0_inst_RX
 			hps_io_hps_io_can0_inst_TX        => B7a_CAN0_TX, --       .hps_io_can0_inst_TX
 			hps_io_hps_io_can1_inst_RX        => B7A_CAN1_RX, --       .hps_io_can1_inst_RX
@@ -409,8 +430,7 @@ begin                                   -- architecture rtl
             dp_0_tx_reconfig_tx_reconfig_busy     => tx_reconfig_reconfig_busy,     
 				
             dp_0_oc_i2c_scl_pad_io                => dp_0_oc_i2c_scl_pad_io,
-            dp_0_oc_i2c_sda_pad_io                => dp_0_oc_i2c_sda_pad_io,
-				
+            dp_0_oc_i2c_sda_pad_io                => dp_0_oc_i2c_sda_pad_io,	
             
             dp_0_dp_tx_aux_aux_in   => B5A_PERSTL1_N,
             dp_0_dp_tx_aux_aux_out => B3B_TX_B37_N,              
@@ -422,6 +442,8 @@ begin                                   -- architecture rtl
             dp_0_dp_tx_video_in_v_sync    =>  tx_video_in_v_sync,      
             dp_0_dp_tx_video_in_h_sync    =>  tx_video_in_h_sync,     
 				----------------------------------------------------------------------
+			video_clk_clk => video_clk,
+			dp_0_cvo_clocked_video_vid_clk => video_clk,
             dp_0_cvo_clocked_video_vid_data         =>  tx_video_in_data,  
             dp_0_cvo_clocked_video_vid_datavalid    =>  tx_video_in_de,    
             dp_0_cvo_clocked_video_vid_v_sync       =>  tx_video_in_v_sync,
@@ -431,6 +453,29 @@ begin                                   -- architecture rtl
             dp_0_cvo_clocked_video_vid_h            => open, 
             dp_0_cvo_clocked_video_vid_v            => open
 		);
+
+	-- Tri-state the I2C interface to the HSMC card
+	B4A_RX_B74_N  <= 'Z' when i2c2_out_data = '0' else '0';
+	B4A_RX_B74_P  <= 'Z' when i2c2_clk = '0' else '0';
+
+	i2c_sampling : process(CLK2DDR)
+	begin
+		if rising_edge(CLK2DDR) then
+			hps_scl_debounce <= hps_scl_debounce(hps_scl_debounce'high-1 downto 0) & B4A_RX_B74_P;
+			hps_sda_debounce <= hps_sda_debounce(hps_sda_debounce'high-1 downto 0) & B4A_RX_B74_N;
+			if hps_scl_debounce = "1111" then
+				i2c2_scl_in_clk <= '1';
+			elsif hps_scl_debounce = "0000" then
+				i2c2_scl_in_clk <= '0';
+			end if;
+
+			if hps_sda_debounce = "11111" then
+				i2c2_sda <= '1';
+			elsif hps_sda_debounce = "00000" then
+				i2c2_sda <= '0';
+			end if;
+		end if;
+	end process;
 
 end architecture rtl;
 

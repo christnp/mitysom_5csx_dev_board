@@ -1,7 +1,7 @@
 set_global_assignment -name FAMILY "Cyclone V"
 set_global_assignment -name DEVICE 5CSXFC6C6U23C7
 set_global_assignment -name TOP_LEVEL_ENTITY dev_5csx_h6_42a_top
-set_global_assignment -name LAST_QUARTUS_VERSION 16.0.2
+set_global_assignment -name LAST_QUARTUS_VERSION 16.0.0
 set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 
 
@@ -842,6 +842,12 @@ set_global_assignment -name QIP_FILE dev_5csx_h6_42a/synthesis/dev_5csx_h6_42a.q
 set_global_assignment -name SDC_FILE dev_5csx_h6_42a.sdc
 set_global_assignment -name VHDL_FILE ./vhdl/dev_5csx_h6_42a_top.vhd
 set_global_assignment -name IPX_FILE dev_5csx_h6_42a.ipx
+set_location_assignment PIN_AE24 -to B4A_RX_B74_P
+set_location_assignment PIN_AE23 -to B4A_RX_B74_N
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to B4A_RX_B74_P
+set_instance_assignment -name AUTO_OPEN_DRAIN_PINS ON -to B4A_RX_B74_P
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to B4A_RX_B74_N
+set_instance_assignment -name AUTO_OPEN_DRAIN_PINS ON -to B4A_RX_B74_N
 set_location_assignment PIN_AH4 -to B3B_TX_B37_N
 set_location_assignment PIN_AA15 -to B4A_RX_B55_N
 set_location_assignment PIN_AF22 -to B4A_RX_B66_P
