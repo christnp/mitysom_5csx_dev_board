@@ -134,6 +134,8 @@ entity dev_5csx_h6_42a_top is
 		GXB_TX_2      : out std_logic;
 		GXB_TX_3      : out std_logic;
 		GXB_REFCLK0   : in  std_logic;
+		PCIE_SMDAT    : inout std_logic;
+		PCIE_SMCLK    : inout std_logic;
 
 		-- HSMC1 BCON adapter
 		HSMC1_CLKIN1      : in std_logic;
@@ -331,7 +333,11 @@ architecture rtl of dev_5csx_h6_42a_top is
 			i2c2_out_data                                     : out   std_logic;                                        -- out_data
 			i2c2_sda                                          : in    std_logic                     := 'X';             -- sda
 			i2c2_clk_clk                                      : out   std_logic;                                        -- clk
-			i2c2_scl_in_clk                                   : in    std_logic                     := 'X'              -- clk
+			i2c2_scl_in_clk                                   : in    std_logic                     := 'X';              -- clk
+			i2c3_out_data                                     : out   std_logic;                                        -- out_data
+			i2c3_sda                                          : in    std_logic                     := 'X';             -- sda
+			i2c3_scl_in_clk                                   : in    std_logic                     := 'X';             -- clk
+			id2c3_clk_clk                                     : out   std_logic                                         -- clk
 
 		);
 	end component dev_5csx_h6_42a;
@@ -366,6 +372,8 @@ architecture rtl of dev_5csx_h6_42a_top is
 	signal s_vid_clk : std_logic;
 	signal HSMC1_SDA_OUT : std_logic := '1';
 	signal HSMC1_SCL_OUT : std_logic := '1';
+	signal PCIE_SMDAT_OUT : std_logic := '1';
+	signal PCIE_SMCLK_OUT : std_logic := '1';
 
 begin                                   -- architecture rtl
 
@@ -558,10 +566,14 @@ begin                                   -- architecture rtl
 			bcon_input_0_video_out_frame_valid                => s_frame_valid,
 			bcon_input_0_video_out_data_valid                 => s_data_valid,
 			bcon_input_0_video_out_data                       => s_data,
-			i2c2_out_data                			  => HSMC1_SDA_OUT,
-			i2c2_sda				    	  => HSMC1_SMSDA,
-			i2c2_clk_clk					  => HSMC1_SCL_OUT,
-			i2c2_scl_in_clk					  => HSMC1_SMSCL
+			i2c2_out_data                	  => HSMC1_SDA_OUT,
+			i2c2_sda				    	        => HSMC1_SMSDA,
+			i2c2_clk_clk					     => HSMC1_SCL_OUT,
+			i2c2_scl_in_clk					  => HSMC1_SMSCL,
+			i2c3_out_data                   => PCIE_SMDAT_OUT,
+			i2c3_sda                        => PCIE_SMDAT,  -- sda
+			i2c3_scl_in_clk                 => PCIE_SMCLK,    -- clk
+			id2c3_clk_clk                   => PCIE_SMCLK_OUT      -- clk
 		);
 
 	-- for RGB, data is output on camera as BGR (B=bit 23-16). VIPII wants RGB(R=bit23-16)
@@ -575,6 +587,9 @@ begin                                   -- architecture rtl
 	s_vid_h_sync <= not s_line_valid;
 	HSMC1_SMSCL_OD : OPNDRN	port map (a_in => not HSMC1_SCL_OUT, a_out => HSMC1_SMSCL);
 	HSMC1_SMSDA_OD : OPNDRN	port map (a_in => not HSMC1_SDA_OUT, a_out => HSMC1_SMSDA);
+
+	PCIE_SMDAT_OD : OPNDRN	port map (a_in => not PCIE_SMDAT_OUT, a_out => PCIE_SMDAT);
+	PCIE_SMCLK_OD : OPNDRN	port map (a_in => not PCIE_SMCLK_OUT, a_out => PCIE_SMCLK);
 
 end architecture rtl;
 
