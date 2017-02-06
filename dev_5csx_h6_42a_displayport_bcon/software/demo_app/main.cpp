@@ -318,6 +318,9 @@ int main(int argc, char* argv[])
 	Config.m_top = 0;
 	lpBCONInput->setAoiConfiguration(Config);
 
+	const CCommandPtr stop = control.GetNode("AcquisitionStop");
+	stop->Execute(true);
+
 	// prep BCON input core to go
 	lpBCONInput->reset(false);
 	lpBCONInput->resetPLL(false);
@@ -326,7 +329,6 @@ int main(int argc, char* argv[])
 	}
 	cout << "... done" << endl;
 
-	// start camera up
 	const CCommandPtr start = control.GetNode("AcquisitionStart");
 	start->Execute(true);
 
@@ -358,7 +360,6 @@ int main(int argc, char* argv[])
 	lpVIPMixerII->SetChannelAlpha(2, 0xFF);
 
 	lpFilter2D->Enable(true);
-
 
 	bool blend = false;
 
@@ -397,7 +398,6 @@ int main(int argc, char* argv[])
 	    	break;
 	    case 'c':
 	    {
-		const CCommandPtr stop = control.GetNode("AcquisitionStop");
 		stop->Execute(true);
 		usleep(100);
 		const CIntegerPtr width = control.GetNode("Width");
@@ -443,7 +443,6 @@ int main(int argc, char* argv[])
         }
 	cout << "Quitting" << endl;
 
-	const CCommandPtr stop = control.GetNode("AcquisitionStop");
 	stop->Execute(true);
 
 	camera.Close();
