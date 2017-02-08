@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simPackage>
+ <file path="cv_video_pll_sim/cv_video_pll.vo" type="VERILOG" />
+ <topLevel name="cv_video_pll" />
+ <deviceFamily name="cyclonev" />
+</simPackage>
