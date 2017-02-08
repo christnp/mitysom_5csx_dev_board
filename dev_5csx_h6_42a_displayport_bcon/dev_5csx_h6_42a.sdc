@@ -13,6 +13,7 @@ create_clock -period 10.000 [get_ports B7A_I2C0_SCL]
 create_clock -period 10.000 [get_ports I2C1_SCL]
 create_clock -period 10.000 [get_ports CLK2DDR]
 create_clock -period 10.000 [get_ports GXB_REFCLK0]
+create_generated_clock -name clk50 -source [get_pins {u0|dp_0|dp_transceivers_0|clk50_|clk}] -divide_by 2 [get_pins {u0|dp_0|dp_transceivers_0|clk50_|q}]
 
 # Constrain I2C to HDMI transmitter
 create_generated_clock -name scl -source [get_pins {u0|hps_0|fpga_interfaces|peripheral_i2c2|out_clk}] -divide_by 250 [get_ports {HSMC1_SMSCL}]

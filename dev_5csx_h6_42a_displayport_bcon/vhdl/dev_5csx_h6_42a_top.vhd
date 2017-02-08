@@ -277,6 +277,7 @@ architecture rtl of dev_5csx_h6_42a_top is
 			dp_0_dp_tx_aux_aux_out                  : out   std_logic;                                        -- aux_out
 			dp_0_dp_tx_aux_aux_oe                   : out   std_logic;                                        -- aux_oe
        			dp_0_dp_tx_aux_hpd                      : in    std_logic                     := 'X';             -- hpd
+			 dp_0_cvo_clocked_video_vid_clk                    : in    std_logic;
 			dp_0_cvo_clocked_video_vid_data         : out   std_logic_vector(23 downto 0);                    -- vid_data
 			dp_0_cvo_clocked_video_underflow        : out   std_logic;                                        -- underflow
 			dp_0_cvo_clocked_video_vid_datavalid    : out   std_logic;                                        -- vid_datavalid
@@ -337,7 +338,8 @@ architecture rtl of dev_5csx_h6_42a_top is
 			i2c3_out_data                                     : out   std_logic;                                        -- out_data
 			i2c3_sda                                          : in    std_logic                     := 'X';             -- sda
 			i2c3_scl_in_clk                                   : in    std_logic                     := 'X';             -- clk
-			id2c3_clk_clk                                     : out   std_logic                                         -- clk
+			id2c3_clk_clk                                     : out   std_logic;                                         -- clk
+			 video_clk_clk                                     : out   std_logic
 
 		);
 	end component dev_5csx_h6_42a;
@@ -363,6 +365,7 @@ architecture rtl of dev_5csx_h6_42a_top is
 
 	signal dp_0_oc_i2c_scl_pad_io                  :  std_logic                     := 'X';             -- scl_pad_io
 	signal dp_0_oc_i2c_sda_pad_io                  :  std_logic                     := 'X';             -- sda_pad_io
+	signal video_clk : std_logic;
 
 	signal s_vid_data, s_data : std_logic_vector(23 downto 0);
 	signal s_vid_de, s_data_valid : std_logic;
@@ -509,6 +512,8 @@ begin                                   -- architecture rtl
 			dp_0_dp_tx_video_in_v_sync    =>  tx_video_in_v_sync,      
 			dp_0_dp_tx_video_in_h_sync    =>  tx_video_in_h_sync,     
 				----------------------------------------------------------------------
+			video_clk_clk => video_clk,
+			dp_0_cvo_clocked_video_vid_clk => video_clk,
 			dp_0_cvo_clocked_video_vid_data         =>  tx_video_in_data,  
 			dp_0_cvo_clocked_video_vid_datavalid    =>  tx_video_in_de,    
 			dp_0_cvo_clocked_video_vid_v_sync       =>  tx_video_in_v_sync,
